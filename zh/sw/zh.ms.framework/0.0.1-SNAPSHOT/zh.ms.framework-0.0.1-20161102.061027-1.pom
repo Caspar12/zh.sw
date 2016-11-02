@@ -6,7 +6,7 @@
 	<artifactId>zh.ms.framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>zh.ms.framework</name>
-
+	<packaging>jar</packaging>
 	<properties>
 		<github.global.server>github</github.global.server>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>zh.sw</groupId>
 			<artifactId>zh.framework</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
