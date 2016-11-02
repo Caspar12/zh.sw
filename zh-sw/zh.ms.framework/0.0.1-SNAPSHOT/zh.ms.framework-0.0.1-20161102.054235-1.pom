@@ -44,7 +44,7 @@
 		<repository>
 			<id>zh.framework-mvn-repo</id>
 			<!-- 这里的url填写依赖的仓库地址 -->
-			<url>https://raw.github.com/Caspar12/zh.sw/zh.ms.framework-mvn-repo/</url>
+			<url>https://raw.github.com/Caspar12/zh.sw/zh.framework-mvn-repo/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
