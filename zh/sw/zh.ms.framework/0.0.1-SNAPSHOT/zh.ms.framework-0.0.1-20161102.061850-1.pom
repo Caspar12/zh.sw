@@ -5,7 +5,8 @@
 	<groupId>zh.sw</groupId>
 	<artifactId>zh.ms.framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>zh.ms.framework</name>	
+	<name>zh.ms.framework</name>
+	<packaging>pom</packaging>	
 	<properties>
 		<github.global.server>github</github.global.server>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
