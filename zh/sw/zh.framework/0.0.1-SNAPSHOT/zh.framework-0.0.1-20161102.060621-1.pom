@@ -6,6 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>zh.framework</name>
 	<description>zh.framework</description>
+	<packaging>jar</packaging>
 	<properties>
 		<github.global.server>github</github.global.server>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,7 +93,7 @@
 		</dependency>
 
 	</dependencies>
-	<packaging>jar</packaging>
+	
 	<build>
 		<sourceDirectory>src.zh.framework</sourceDirectory>
 		<resources>
