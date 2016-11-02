@@ -44,3 +44,13 @@ hs_err_pid*
 /zh.ms.web.admin.ide/.settings
 /zh.ms.web.admin.ide/.classpath
 /zh.ms.web.admin.ide/.project
+/zh.ms.core.api/.classpath
+/zh.ms.core.api/.project
+/zh.ms.core.api/.settings/org.eclipse.core.resources.prefs
+/zh.ms.core.api/.settings/org.eclipse.jdt.core.prefs
+/zh.ms.core.api/.settings/org.eclipse.m2e.core.prefs
+/zh.ms.core.api/target/classes/META-INF/MANIFEST.MF
+/zh.ms.core.api/target/classes/META-INF/maven/zh.sw/zh.ms.user.api/pom.properties
+/zh.ms.core.api/target/classes/META-INF/maven/zh.sw/zh.ms.user.api/pom.xml
+/zh.ms.core.api/target/classes/application.yml
+/zh.ms.core.api/target/classes/message_zh_CN.properties

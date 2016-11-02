@@ -2,15 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>zh-sw</groupId>
+	<groupId>zh.sw</groupId>
 	<artifactId>zh.ms.framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
 	<name>zh.ms.framework</name>
-	<url>http://maven.apache.org</url>
-
-
+	<packaging>jar</packaging>	
 	<properties>
 		<github.global.server>github</github.global.server>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,9 +29,13 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>zh.sw</groupId>
 			<artifactId>zh.framework</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -47,7 +47,7 @@
 		<repository>
 			<id>zh.framework-mvn-repo</id>
 			<!-- 这里的url填写依赖的仓库地址 -->
-			<url>https://raw.github.com/Caspar12/zh.framework/mvn-repo/</url>
+			<url>https://raw.github.com/Caspar12/zh.sw/zh.framework-mvn-repo/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -100,12 +100,12 @@
 					<message>Maven artifacts for ${project.version}</message>  <!--git commit message -->
 					<noJekyll>true</noJekyll>
 					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-					<branch>refs/heads/zh-ms-framework-mvn-repo</branch>                       <!-- remote branch name -->
+					<branch>refs/heads/zh.ms.framework-mvn-repo</branch>                       <!-- remote branch name -->
 					<includes>
 						<include>**/*</include>
 					</includes>
 					<userName>Caspar12</userName>
-					<repositoryName>zh.framework</repositoryName>      <!-- github repo name -->
+					<repositoryName>zh.sw</repositoryName>      <!-- github repo name -->
 					<repositoryOwner>Caspar12</repositoryOwner>    <!-- github username -->
 				</configuration>
 				<executions>
@@ -113,7 +113,7 @@
 						<goals>
 							<goal>site</goal>
 						</goals>
-						<phase>site</phase>
+						<phase>deploy</phase>
 					</execution>
 				</executions>
 			</plugin>

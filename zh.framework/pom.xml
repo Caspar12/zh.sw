@@ -3,9 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>zh.sw</groupId>
 	<artifactId>zh.framework</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>zh.framework</name>
 	<description>zh.framework</description>
+	<packaging>jar</packaging>
 	<properties>
 		<github.global.server>github</github.global.server>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,7 +93,7 @@
 		</dependency>
 
 	</dependencies>
-	<packaging>jar</packaging>
+	
 	<build>
 		<sourceDirectory>src.zh.framework</sourceDirectory>
 		<resources>
@@ -141,7 +142,7 @@
 					<message>Maven artifacts for ${project.version}</message>  <!--git commit message -->
 					<noJekyll>true</noJekyll>
 					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-					<branch>refs/heads/zh-framework-mvn-repo</branch>                       <!-- remote branch name -->
+					<branch>refs/heads/zh.framework-mvn-repo</branch>                       <!-- remote branch name -->
 					<includes>
 						<include>**/*</include>
 					</includes>
