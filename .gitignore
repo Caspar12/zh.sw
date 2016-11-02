@@ -10,3 +10,37 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/zh.framework/.project
+/zh.framework/.settings
+/zh.framework/.classpath
+/zh.user.api/.settings
+/zh.user.api/target
+/zh.user.api/.classpath
+/zh.user.api/.project
+/zh.ms.web.app.ide/.settings
+/zh.ms.web.app.ide/target
+/zh.ms.web.app.ide/.classpath
+/zh.ms.web.app.ide/.project
+/zh.ms.framework/.settings
+/zh.ms.framework/.classpath
+/zh.ms.framework/.project
+/zh.ms.framework/.settings
+/zh.ms.framework/target
+/zh.ms.framework/.classpath
+/zh.ms.framework/.project
+/zh.ms.user.api/.settings
+/zh.ms.user.api/.classpath
+/zh.ms.user.api/.project
+/zh.ms.web.admin.ide/.settings
+/zh.ms.web.admin.ide/.classpath
+/zh.ms.web.admin.ide/.project
+/zh.ms.user.api/.project
+/zh.ms.user.api/.settings
+/zh.ms.user.api/.classpath
+/zh.ms.web.admin.ide/.settings
+/zh.ms.web.admin.ide/.classpath
+/zh.ms.web.admin.ide/.project
+/zh.ms.user.api/target
+/zh.ms.web.admin.ide/.settings
+/zh.ms.web.admin.ide/.classpath
+/zh.ms.web.admin.ide/.project
