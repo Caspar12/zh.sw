@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>zh-sw</groupId>
+  <artifactId>zh.ms.framework</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20161102034753</lastUpdated>
+  </versioning>
+</metadata>
