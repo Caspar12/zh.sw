@@ -1,6 +1,7 @@
 package zh.ms.core.api.web.controllers;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import zh.framework.utils.I18NUtils;
 import zh.framework.validator.constraints.IsCNMainLandMobilePhone;
 import zh.framework.validator.constraints.IsUUID;
-import zh.ms.core.api.bll.services.BLLContext;
+import zh.ms.core.api.bll.BLLContext;
 import zh.ms.core.api.dal.models.UserMain;
 import zh.ms.core.api.web.models.UserApiModel;
 
@@ -25,24 +27,23 @@ import zh.ms.core.api.web.models.UserApiModel;
  */
 @RestController
 @RequestMapping(value = "identity")
-@Validated
+
 public class IdentityController {
 	@Resource
 	BLLContext bllContext;
+	@Resource
+	I18NUtils i18NUtils;
 
-	@RequestMapping(value = "registerByMobilePhone", method = { RequestMethod.POST })
-	public UserApiModel registerByMobilePhone(@IsUUID String appId, @IsCNMainLandMobilePhone String mobilePhone,
-			@Length(min = 6, max = 32) String pwd)
+	@RequestMapping(value = "registerByMobilePhone")
+	public UserApiModel registerByMobilePhone(String appId, String mobilePhone, String pwd)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException {
 		UserMain userMain = bllContext.UserMainService.registerByMobilePhone(appId, mobilePhone, pwd);
 		UserApiModel userApiModel = UserApiModel.fromUserMain(userMain);
-
 		return userApiModel;
 	}
 
-	@RequestMapping(value = "loginByMobilePhone", method = { RequestMethod.POST })
-	public UserApiModel loginByMobilePhone(@IsUUID String appId, @IsCNMainLandMobilePhone String mobilePhone,
-			@Length(min = 6, max = 32) String pwd)
+	@RequestMapping(value = "loginByMobilePhone")
+	public UserApiModel loginByMobilePhone(String appId, String mobilePhone, String pwd)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException {
 		UserMain userMain = bllContext.UserMainService.loginByMobilePhone(appId, mobilePhone, pwd);
 		UserApiModel userApiModel = UserApiModel.fromUserMain(userMain);

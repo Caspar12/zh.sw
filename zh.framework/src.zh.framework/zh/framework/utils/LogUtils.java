@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
  */
 public class LogUtils {
 	/**
-	 * 获取默认日志Logger
-	 * 1.调用类类型名称
-	 * 2.条件1Logger,不存在获取默认root Logger
+	 * 获取默认日志Logger<br />
+	 * 1.调用类类型名称<br />
+	 * 2.条件1 Logger,不存在获取默认root Logger
 	 * @return
 	 */
 	public static Logger getDefaultLogger() {

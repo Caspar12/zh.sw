@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,6 +17,16 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.Modifier;
+import javassist.NotFoundException;
+import javassist.bytecode.CodeAttribute;
+import javassist.bytecode.LocalVariableAttribute;
+import javassist.bytecode.MethodInfo;
 
 public class ReflectUtils {
 
@@ -512,5 +523,116 @@ public class ReflectUtils {
 
 			}
 		}
+	}
+
+	/**
+	 * 获取所有同名方法第一个方法全部参数名称
+	 * 
+	 * @return 方法全部参数名称
+	 * @throws NotFoundException
+	 *             打不到方法
+	 */
+	public static String[] getMethodParameterNames(Class<?> clazz, String methodName) throws NotFoundException {
+
+		ClassPool pool = ClassPool.getDefault();
+		CtClass cc = pool.get(clazz.getName());
+		CtMethod cm = cc.getDeclaredMethod(methodName);
+
+		// 使用javaassist的反射方法获取方法的参数名
+		MethodInfo methodInfo = cm.getMethodInfo();
+		CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
+		LocalVariableAttribute attr = (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
+		if (attr == null) {
+			throw new NotFoundException(MessageFormat.format("找不到方法:{0}", methodName));
+		}
+
+		String[] paramNames = new String[cm.getParameterTypes().length];
+		int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
+		for (int i = 0; i < paramNames.length; i++) {
+			paramNames[i] = attr.variableName(i + pos);
+		}
+		return paramNames;
+
+	}
+
+	/**
+	 * 获取所有同名方法中与实参数量相同,且所有实参类型相同的惟一的方法参数名称
+	 * 
+	 * @param clazz
+	 *            方法所属类型
+	 * @param methodName
+	 *            方法名
+	 * @param realParams
+	 *            方法调用的实参
+	 * @return 方法全部参数名称
+	 * @throws NotFoundException
+	 *             找不到对应方法
+	 * @throws CannotCompileException
+	 *             找到多个同名方法
+	 */
+	public static String[] getMethodParameterNames(Class<?> clazz, String methodName, Object[] realParams)
+			throws NotFoundException, CannotCompileException {
+		ClassPool pool = ClassPool.getDefault();
+		CtClass cc = pool.get(clazz.getName());
+		CtMethod[] cm = cc.getDeclaredMethods(methodName);
+		List<CtMethod> fiterCm = new ArrayList<>(cm.length);
+		for (CtMethod method : cm) {
+			CtClass[] paramTypes = method.getParameterTypes();
+			if (paramTypes.length != realParams.length) {
+				continue;
+			}
+			boolean isFined = true;
+			for (int i = 0; i < paramTypes.length; i++) {
+				CtClass paramType = paramTypes[0];
+				Object realParam = realParams[0];
+				if (realParam == null) {
+					isFined = false;
+					break;
+				}
+				CtClass realParamType = pool.get(realParam.getClass().getName());
+				if (paramType.subtypeOf(realParamType) == false) {
+					isFined = false;
+					break;
+				}
+			}
+			if (isFined) {
+				fiterCm.add(method);
+			}
+		}
+		if (fiterCm.size() > 1) {
+			throw new javassist.CannotCompileException(
+					MessageFormat.format("找到多个同名,并且参数数目相同,参数类型无法区分的方法,方法名:{0}", methodName));
+		}
+		CtMethod method = fiterCm.get(0);
+		// 使用javaassist的反射方法获取方法的参数名
+		MethodInfo methodInfo = method.getMethodInfo();
+		CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
+		LocalVariableAttribute attr = (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
+		if (attr == null) {
+			throw new NotFoundException(MessageFormat.format("找不到方法:{0}", methodName));
+		}
+
+		String[] paramNames = new String[method.getParameterTypes().length];
+		int pos = Modifier.isStatic(method.getModifiers()) ? 0 : 1;
+		for (int i = 0; i < paramNames.length; i++) {
+			paramNames[i] = attr.variableName(i + pos);
+		}
+		return paramNames;
+	}
+
+	public void test() {
+
+	}
+
+	public void test(Integer iI) {
+
+	}
+
+	public void test(int ii) {
+
+	}
+
+	public void test(String iS) {
+
 	}
 }

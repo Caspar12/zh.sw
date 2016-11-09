@@ -1,4 +1,4 @@
-package zh.ms.core.api.bll.services.impls;
+package zh.ms.core.api.bll.impls;
 
 import java.text.MessageFormat;
 import java.util.UUID;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import zh.framework.utils.CodecUtils;
 import zh.framework.utils.I18NUtils;
-import zh.ms.core.api.bll.services.UserMainService;
+import zh.ms.core.api.bll.UserMainService;
 import zh.ms.core.api.dal.DALContext;
 import zh.ms.core.api.dal.models.UserMain;
 
@@ -27,7 +27,8 @@ public class UserMainServiceImpl implements UserMainService {
 
 	@Resource
 	DALContext dalContext;
-
+	@Resource
+	I18NUtils i18NUtils;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -35,21 +36,19 @@ public class UserMainServiceImpl implements UserMainService {
 	 * zh.ms.user.api.bll.services.UserMainService#registerByMobilePhone(java.
 	 * lang.String, java.lang.String, java.lang.String)
 	 */
- 
+
 	public UserMain registerByMobilePhone(String appId, String mobilePhone, String pwd) {
+
 		
-		if (dalContext.UserMainDao.existsByAppIdAndMobilePhone(appId, mobilePhone)) {
-			throw new ValidationException(I18NUtils.getMessage("usermain.service.exception.exists.mobilephone",
+		if (dalContext.UserMainDao.countByAppIdAndMobilePhone(appId, mobilePhone) > 0) {
+			throw new ValidationException(i18NUtils.getMessage("usermain.service.exception.exists.mobilephone",
 					new Object[] { mobilePhone }));
 		}
 		String pwdMD5 = codecPwd(pwd);
 		UserMain userMain = new UserMain();
-		userMain.setAccount("");
-		userMain.setAppId(appId);
-		userMain.setId(UUID.randomUUID().toString());
-		userMain.setMobilePhone(mobilePhone);
-		userMain.setPassword(pwdMD5);
+		 
 		dalContext.UserMainDao.save(userMain);
+
 		return userMain;
 	}
 
@@ -60,12 +59,12 @@ public class UserMainServiceImpl implements UserMainService {
 	 * zh.ms.user.api.bll.services.UserMainService#loginByMobilePhone(java.lang.
 	 * String, java.lang.String, java.lang.String)
 	 */
- 
+
 	public UserMain loginByMobilePhone(String appId, String mobilePhone, String pwd) {
 		String pwdMD5 = codecPwd(pwd);
 		UserMain userMain = dalContext.UserMainDao.findByAppIdAndMobilePhoneAndPassword(appId, mobilePhone, pwdMD5);
 		if (userMain == null) {
-			throw new ValidationException(I18NUtils.getMessage(
+			throw new ValidationException(i18NUtils.getMessage(
 					"usermain.service.exception.mobilephone.or.password.error", new Object[] { mobilePhone }));
 		}
 		return userMain;

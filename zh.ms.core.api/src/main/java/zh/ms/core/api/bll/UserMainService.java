@@ -1,8 +1,9 @@
-package zh.ms.core.api.bll.services;
+package zh.ms.core.api.bll;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import zh.framework.validator.constraints.IsCNMainLandMobilePhone;
 import zh.framework.validator.constraints.IsUUID;
@@ -15,7 +16,7 @@ import zh.ms.core.api.dal.models.UserMain;
  * @description
  */
 
-
+@Validated
 public interface UserMainService {
 	/**
 	 * 使用手机注册用户信息，MD5加密pwd密码

@@ -1,7 +1,6 @@
 package zh.ms.core.api.dal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 
 import zh.ms.core.api.dal.models.UserMain;
 
@@ -11,13 +10,13 @@ import zh.ms.core.api.dal.models.UserMain;
  * @createdDate 2016年10月29日
  * @description
  */
-@org.springframework.stereotype.Repository
+// @org.springframework.stereotype.Repository
 public interface UserMainDao extends org.springframework.data.repository.CrudRepository<UserMain, String> {
 
 	/**
 	 * @param mobilePhone
 	 */
-	boolean existsByAppIdAndMobilePhone(String appId, String mobilePhone);
+	Long countByAppIdAndMobilePhone(String appId, String mobilePhone);
 
 	/**
 	 * @param appId

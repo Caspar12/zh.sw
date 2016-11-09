@@ -24,7 +24,7 @@ public class ValidUtils {
 	 * @return
 	 */
 	public static boolean isCNMainlandMobilePhone(String value) {
-		String reg = "^[1][\\d]{10}";
+		String reg = "^1\\d{10}";
 		Pattern pattern = Pattern.compile(reg);
 		Matcher matcher = pattern.matcher(value);
 		return matcher.matches();
