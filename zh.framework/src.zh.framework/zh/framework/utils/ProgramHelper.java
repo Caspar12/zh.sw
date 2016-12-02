@@ -1,22 +1,12 @@
 package zh.framework.utils;
 
 import java.awt.image.BufferedImage;
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.text.MessageFormat;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,8 +14,6 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ProgramHelper {
@@ -71,7 +59,7 @@ public class ProgramHelper {
 		return arrayList;
 	}
 
-	public static boolean isNullOrEmpty(Map pMap) {
+	public static boolean isNullOrEmpty(Map<?, ?> pMap) {
 		return pMap == null || pMap.size() == 0;
 	}
 
@@ -85,10 +73,10 @@ public class ProgramHelper {
 	}
 
 	public static void whenLengthGtAddString(int pLength, String pAppendSeparator, Collection<String> pCollection,
-			String pAppendContent, StringBuilder pStringBuffer) {
+			StringBuilder pStringBuffer) {
 		if (pCollection != null) {
-			for (String string : pCollection) {
-				whenLengthGtAddString(pLength, pAppendSeparator, pAppendContent, pStringBuffer);
+			for (String content : pCollection) {
+				whenLengthGtAddString(pLength, pAppendSeparator, content, pStringBuffer);
 			}
 		}
 	}

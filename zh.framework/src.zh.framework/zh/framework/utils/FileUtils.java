@@ -2,7 +2,6 @@ package zh.framework.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -84,11 +83,10 @@ public class FileUtils {
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			String tempString = null;
-			int line = 1;
 
 			while ((tempString = reader.readLine()) != null) {
 				result.add(tempString);
-				line++;
+
 			}
 			reader.close();
 		} catch (IOException e) {
@@ -135,7 +133,7 @@ public class FileUtils {
 		FileWriter fw;
 		try {
 			FileUtils.createNewFileIsNotExists(filePath);
-			fw = new FileWriter(file);			
+			fw = new FileWriter(file);
 			fw.write(content);
 			fw.close();
 		} catch (IOException e) {

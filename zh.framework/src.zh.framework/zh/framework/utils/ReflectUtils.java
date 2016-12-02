@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -340,8 +341,8 @@ public class ReflectUtils {
 	 *            注解类型
 	 * @return 所有有某一类型注解的所有字段
 	 */
-	@SuppressWarnings("unchecked")
-	public static List<Field> findDeclaredFields(Class<?> type, Class annotationType) {
+
+	public static List<Field> findDeclaredFields(Class<?> type, Class<Annotation> annotationType) {
 		List<Field> result = new ArrayList<>();
 		Field[] fields = type.getDeclaredFields();
 		for (Field field : fields) {

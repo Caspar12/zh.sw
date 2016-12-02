@@ -7,7 +7,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import zh.framework.utils.ReflectUtils;
-import zh.framework.utils.ValidUtils;
 
 /**
  * Unit test for simple App.
@@ -33,6 +32,7 @@ public class AppTest extends TestCase {
 	/**
 	 * Rigourous Test :-)
 	 */
+	@SuppressWarnings("deprecation")
 	@org.junit.Test
 	public void testApp() {
 

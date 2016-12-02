@@ -35,9 +35,9 @@ public class IsUUIDValidator implements ConstraintValidator<IsUUID, String> {
 	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		// TODO Auto-generated method stub
+		//
 		try {
-			UUID kUuid = UUID.fromString(value);
+			UUID.fromString(value);
 			return true;
 		} catch (Exception e) {
 			return false;
