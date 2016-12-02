@@ -14,8 +14,9 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 import antlr.RecognitionException;
 import zh.framework.exceptions.ZhException;
 
-@ComponentScan(basePackages = { "zh.ms.core.api.web", "zh.ms.core.api.bll", "zh.ms.core.api.dal", "zh.framework.utils" })
-public class Starter extends zh.ms.framework.api.Starter {
+@ComponentScan(basePackages = { "zh.ms.core.api.web", "zh.ms.core.api.bll", "zh.ms.core.api.dal",
+		"zh.framework.utils" })
+public class Starter extends zh.ms.framework.Starter {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Starter.class, args);

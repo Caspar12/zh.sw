@@ -2,8 +2,7 @@ package zh.ms.framework.utils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
-import zh.web.utils.WebUtil;
+ 
 
 /**
  * @author 陈志杭
@@ -16,6 +15,7 @@ public class WebUtils {
 	private static HttpServletRequest request;
 
 	public static boolean isAjax() {
-		return WebUtil.isAjax(request);
+		//TODO: not finish
+		return false;
 	}
 }
