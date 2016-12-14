@@ -3,10 +3,7 @@ package zh.framework.utils;
 import java.util.Locale;
 
 import javax.annotation.Resource;
-
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Component;
+ 
 
 /**
  * @author 陈志杭
@@ -14,9 +11,9 @@ import org.springframework.stereotype.Component;
  * @createdDate 2016年10月31日
  * @description 基于Spring的国际化工具
  */
-@Component
+//@Component
 public class I18NUtils {
-	@Resource
+	/*@Resource
 	private MessageSource messageSource;
 
 	public String getMessage(String key) {
@@ -27,5 +24,5 @@ public class I18NUtils {
 	public String getMessage(String key, Object[] args) {
 		Locale locale = LocaleContextHolder.getLocale();
 		return messageSource.getMessage(key, args, locale);
-	}
+	}*/
 }

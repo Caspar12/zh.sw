@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>zh.sw</groupId>
+		<artifactId>zh.ms</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>zh.ms.parent</artifactId>
+	<name>zh.ms.parent</name>
+	<packaging>pom</packaging>
+	<properties>
+		<!-- zh.ms.framework项目的根目录 -->
+		<zh.ms.framework.basedir>${project.basedir}/../../zh.ms.framework</zh.ms.framework.basedir>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>zh.sw</groupId>
+			<artifactId>zh.ms.framework</artifactId>
+			<version>${zh.ms.framework.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${zh.ms.framework.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+</project>

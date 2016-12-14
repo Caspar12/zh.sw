@@ -9,14 +9,15 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>zh.sw</groupId>
-	<artifactId>zh.sw.ms</artifactId>
+	<artifactId>zh.ms</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>zh.sw.ms</name>
+	<name>zh.ms</name>
 	<url>https://github.com/Caspar12/</url>
 	<description>微服务</description>
 	<modules>
-		<module>zh.ms</module>
+		<module>zh.ms.framework</module>
+		<module>zh.ms.parent</module>
 	</modules>
 	<properties>
 		<github.global.server>github</github.global.server>
@@ -44,7 +45,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,9 +55,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -102,7 +100,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -116,13 +113,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
-
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
@@ -134,6 +129,5 @@
 				<directory>${basedir}/../zh.ms.framework/src/main/resources</directory>
 			</resource>
 		</resources>
-
 	</build>
 </project>
