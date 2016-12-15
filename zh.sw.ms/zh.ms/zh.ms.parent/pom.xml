@@ -15,6 +15,17 @@
 		<!-- zh.ms.framework项目的根目录 -->
 		<zh.ms.framework.basedir>${project.basedir}/../../zh.ms.framework</zh.ms.framework.basedir>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Brixton.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>zh.sw</groupId>

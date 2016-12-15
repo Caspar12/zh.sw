@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 陈志杭
  * @qq 279397942@qq.com
  * @createdDate 2016年12月10日
- * @description
+ * @description 微服务启动注解
  */
 @RestController
 @SpringBootApplication
@@ -25,6 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface ApplicationBoot {
+public @interface MicroServiceApplication {
 
 }

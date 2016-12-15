@@ -2,20 +2,14 @@ package zh.ms.framework.configs;
 
 import javax.annotation.Resource;
 
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration; 
-import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author 陈志杭
@@ -26,9 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  *              语言位置 <br />
  */
 @Configuration
-@EnableWebMvc
-
-@Slf4j
 public class StarterConfig extends WebMvcConfigurerAdapter  {
 	@Resource
 	private MessageSource messageSource;
@@ -39,7 +30,6 @@ public class StarterConfig extends WebMvcConfigurerAdapter  {
 		antPathMatcher.setCaseSensitive(false);
 		configurer.setPathMatcher(antPathMatcher);
 		super.configurePathMatch(configurer);
-
 	}
 
 	@Bean
@@ -51,14 +41,8 @@ public class StarterConfig extends WebMvcConfigurerAdapter  {
 
 	@Bean
 	public LocalValidatorFactoryBean validator() {
-
 		LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
 		validatorFactoryBean.setValidationMessageSource(messageSource);
 		return validatorFactoryBean;
 	}
-
- 
-
-	
-
 }
