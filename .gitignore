@@ -96,3 +96,10 @@ hs_err_pid*
 /zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.config.center/.classpath
 /zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.config.center/.gitignore
 /zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.config.center/.project
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.registration/cmd/*.log
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.configuration/.classpath
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.configuration/.gitignore
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.configuration/.project
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.configuration/.settings/org.eclipse.core.resources.prefs
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.configuration/.settings/org.eclipse.jdt.core.prefs
+/zh.sw.ms/zh.ms/zh.ms.parent/zh.ms.infrastructure.parent/zh.ms.infrastructure.configuration/.settings/org.eclipse.m2e.core.prefs

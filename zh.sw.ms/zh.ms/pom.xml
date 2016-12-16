@@ -117,6 +117,18 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
+			<!-- spring boot 独立 jar或war包打包插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<resources>
 			<resource>
@@ -129,5 +141,6 @@
 				<directory>${basedir}/../zh.ms.framework/src/main/resources</directory>
 			</resource>
 		</resources>
+
 	</build>
 </project>
