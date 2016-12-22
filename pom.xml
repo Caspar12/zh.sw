@@ -1,21 +1,85 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>zh.sw</groupId>
-	<artifactId>zh.sw</artifactId>
-	<version>1.0.0</version>
-	<name>zh.sw</name>
-	<packaging>pom</packaging>
-	<modules>
-		<module>zh.framework</module>
-		<module>zh.sw.ms</module>
-	</modules>
-	<properties>
-		
-	</properties>
-	<dependencies>
-	</dependencies>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>zh.sw</groupId>
+    <artifactId>zh.sw</artifactId>
+    <version>1.0.0</version>
+    <name>zh.sw</name>
+    <packaging>pom</packaging>
+    <modules>
+        <module>zh.framework</module>
+        <module>zh.ms.framework</module>
+        <module>zh.ms.parent</module>
 
+    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <zh.framework.version>1.0.0</zh.framework.version>
+        <zh.ms.framework.version>1.0.0</zh.ms.framework.version>
+        <zh.ms.infrastructure.starter.version>1.0.0</zh.ms.infrastructure.starter.version>
+        <zh.ms.starter.version>1.0.0</zh.ms.starter.version>
+        <zh.ms.version>zh.ms</zh.ms.version>
+        <spring-boot-dependencies.version>1.4.2.RELEASE</spring-boot-dependencies.version>
+        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Brixton.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>zh.sw</groupId>
+                <artifactId>zh.framework</artifactId>
+                <version>${zh.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.4</version>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- 编译成1.8 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <!-- spring boot 独立 jar或war打包插件 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>1.4.2.RELEASE</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

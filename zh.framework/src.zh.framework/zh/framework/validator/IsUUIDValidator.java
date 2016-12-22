@@ -5,7 +5,7 @@ import java.util.UUID;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import zh.framework.validator.constraints.IsUUID;
+import zh.framework.validator.constraint.IsUUID;
 
 /**
  * @author 陈志杭

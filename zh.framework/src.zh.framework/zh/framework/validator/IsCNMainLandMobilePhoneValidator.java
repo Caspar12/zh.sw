@@ -3,8 +3,8 @@ package zh.framework.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import zh.framework.utils.ValidUtils;
-import zh.framework.validator.constraints.IsCNMainLandMobilePhone;
+import zh.framework.util.ValidUtils;
+import zh.framework.validator.constraint.IsCNMainLandMobilePhone;
 
 /**
  * @author 陈志杭
