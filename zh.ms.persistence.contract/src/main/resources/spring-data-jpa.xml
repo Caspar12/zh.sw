@@ -15,7 +15,7 @@
     </bean>
 
 
-    <bean id="entityManagerFactory" name="accountEntityManagerFactory,entityManagerFactory"
+    <bean id="entityManagerFactory" name="accountEntityManagerFactory,entityManagerFactory" primary="true"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           destroy-method="destroy">
         <property name="dataSource" ref="accountDataSource"/>
@@ -25,46 +25,50 @@
                 <property name="showSql" value="true"/>
             </bean>
         </property>
-        <property name="packagesToScan" value="zh.ms.persistence.contract"/>
+        <property name="packagesToScan" value="zh.ms.persistence.contract.account"/>
+        <property name="persistenceUnitName" value="accountUnit" />
         <property name="jpaPropertyMap">
             <map>
                 <entry key="hibernate.hbm2ddl.auto" value="update"/>
             </map>
         </property>
     </bean>
-    <bean id="transactionManager" name="accountTransactionManager"
+    <bean id="transactionManager" name="accountTransactionManager" primary="true"
           class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!--&lt;!&ndash; category数据库配置 &ndash;&gt;-->
-    <!--<bean id="categoryDataSource" name="categoryDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="driverClassName" value="org.h2.Driver"/>-->
-        <!--<property name="url" value="jdbc:h2:file:~/.h2/zh_ds_category"/>-->
-        <!--<property name="username" value="sa"/>-->
-        <!--<property name="password" value="sa"/>-->
-    <!--</bean>-->
+    <!-- category数据库配置 -->
+    <bean id="categoryDataSource" name="categoryDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:file:~/.h2/zh_ds_category"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="sa"/>
+    </bean>
 
-    <!--<bean id="categoryEntityManagerFactory" name="categoryEntityManagerFactory"-->
-          <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"-->
-          <!--destroy-method="destroy">-->
-        <!--<property name="dataSource" ref="categoryDataSource"/>-->
-        <!--<property name="jpaVendorAdapter">-->
-            <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">-->
-                <!--<property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>-->
-                <!--<property name="showSql" value="true"/>-->
-            <!--</bean>-->
-        <!--</property>-->
-        <!--<property name="packagesToScan" value="zh.ms.persistence.contract.category"/>-->
-        <!--<property name="jpaPropertyMap">-->
-            <!--<map>-->
-                <!--<entry key="hibernate.hbm2ddl.auto" value="update"/>-->
-            <!--</map>-->
-        <!--</property>-->
-    <!--</bean>-->
-    <!--<bean id="categoryTransactionManager" name="categoryTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-        <!--<property name="entityManagerFactory" ref="categoryEntityManagerFactory"/>-->
-    <!--</bean>-->
-    <!--<tx:annotation-driven transaction-manager="categoryTransactionManager"/>-->
+    <bean id="categoryEntityManagerFactory" name="categoryEntityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          destroy-method="destroy">
+        <property name="dataSource" ref="categoryDataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
+                <property name="showSql" value="true"/>
+            </bean>
+        </property>
+        <property name="persistenceUnitName" value="categoryUnit" />
+        <property name="packagesToScan" value="zh.ms.persistence.contract.category"/>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.hbm2ddl.auto" value="update"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="categoryTransactionManager" name="categoryTransactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="categoryEntityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="categoryTransactionManager"/>
 </beans>

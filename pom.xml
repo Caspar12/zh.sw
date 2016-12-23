@@ -10,6 +10,7 @@
         <module>zh.framework</module>
         <module>zh.ms.framework</module>
         <module>zh.ms.parent</module>
+        <module>zh.mybatis</module>
 
     </modules>
     <properties>
@@ -22,6 +23,9 @@
         <zh.ms.version>zh.ms</zh.ms.version>
         <spring-boot-dependencies.version>1.4.2.RELEASE</spring-boot-dependencies.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+        <mybatis.version>3.4.0</mybatis.version>
+        <mango.version>1.3.5</mango.version>
+        <mybatis-spring.version>1.3.0</mybatis-spring.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -50,6 +54,16 @@
                 <artifactId>lombok</artifactId>
                 <version>1.16.4</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

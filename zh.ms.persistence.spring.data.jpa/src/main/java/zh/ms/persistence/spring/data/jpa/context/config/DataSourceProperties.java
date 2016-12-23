@@ -1,6 +1,10 @@
 package zh.ms.persistence.spring.data.jpa.context.config;
 
+import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 陈志杭
@@ -10,5 +14,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties("zh")
 public class DataSourceProperties {
-
+    List<JpaProperties> jpaPropertiesList = new ArrayList<>();
 }
