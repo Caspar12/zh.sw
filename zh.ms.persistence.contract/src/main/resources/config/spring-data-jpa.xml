@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+>
+
+    <!-- account数据库配置 -->
+    <!-- 这里多数据源,springBoot启动时需要指定一个默认的数据源，所以需要加primary="true",否则会出现数据源bean匹配失败错误 -->
+    <bean id="accountDataSource" name="accountDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource" primary="true">
+        <property name="driverClassName" value="${zh.datasources.account.datasource.driverClassName}"/>
+        <property name="url" value="${zh.datasources.account.datasource.url}"/>
+        <property name="username" value="${zh.datasources.account.datasource.username}"/>
+        <property name="password" value="${zh.datasources.account.datasource.password}"/>
+    </bean>
+
+
+    <bean id="accountEntityManagerFactory" name="accountEntityManagerFactory" primary="true"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          destroy-method="destroy">
+        <property name="dataSource" ref="accountDataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="${zh.datasources.account.jpa.dialect}"/>
+                <property name="showSql" value="${zh.datasources.account.jpa.showSql}"/>
+                <property name="generateDdl" value="${zh.datasources.account.jpa.generateDdl}"/>
+            </bean>
+        </property>
+        <property name="packagesToScan" value="${zh.datasources.account.jpa.entity.packagesToScan}"/>
+        <property name="persistenceUnitName" value="${zh.datasources.account.jpa.persistenceUnitName}"/>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.physical_naming_strategy"
+                       value="${zh.datasources.account.jpa.hibernate.physical_naming_strategy}"></entry>
+                <entry key="hibernate.implicit_naming_strategy"
+                       value="${zh.datasources.account.jpa.hibernate.implicit_naming_strategy}"></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="accountTransactionManager" name="accountTransactionManager" primary="true"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="accountEntityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="accountTransactionManager"/>
+    <jpa:repositories base-package="${zh.datasources.account.jpa.repository.packagesToScan}"
+                      entity-manager-factory-ref="accountEntityManagerFactory"
+                      transaction-manager-ref="accountTransactionManager"/>
+
+
+    <!-- category数据库配置 -->
+    <bean id="categoryDataSource" name="categoryDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${zh.datasources.category.datasource.driverClassName}"/>
+        <property name="url" value="${zh.datasources.category.datasource.url}"/>
+        <property name="username" value="${zh.datasources.category.datasource.username}"/>
+        <property name="password" value="${zh.datasources.category.datasource.password}"/>
+    </bean>
+
+
+    <bean id="categoryEntityManagerFactory" name="categoryEntityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          destroy-method="destroy">
+        <property name="dataSource" ref="categoryDataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="${zh.datasources.category.jpa.dialect}"/>
+                <property name="showSql" value="${zh.datasources.category.jpa.showSql}"/>
+                <property name="generateDdl" value="${zh.datasources.category.jpa.generateDdl}"/>
+            </bean>
+        </property>
+        <property name="packagesToScan" value="${zh.datasources.category.jpa.entity.packagesToScan}"/>
+        <property name="persistenceUnitName" value="${zh.datasources.category.jpa.persistenceUnitName}"/>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.physical_naming_strategy"
+                       value="${zh.datasources.category.jpa.hibernate.physical_naming_strategy}"></entry>
+                <entry key="hibernate.implicit_naming_strategy"
+                       value="${zh.datasources.category.jpa.hibernate.implicit_naming_strategy}"></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="categoryTransactionManager" name="categoryTransactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="categoryEntityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="categoryTransactionManager"/>
+    <jpa:repositories base-package="${zh.datasources.category.jpa.repository.packagesToScan}"
+                      entity-manager-factory-ref="categoryEntityManagerFactory"
+                      transaction-manager-ref="categoryTransactionManager"/>
+
+
+</beans>

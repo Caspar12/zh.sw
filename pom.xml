@@ -11,6 +11,7 @@
         <module>zh.ms.framework</module>
         <module>zh.ms.parent</module>
         <module>zh.mybatis</module>
+        <module>zh.plugin.mybatis</module>
 
     </modules>
     <properties>

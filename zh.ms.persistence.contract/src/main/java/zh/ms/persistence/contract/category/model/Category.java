@@ -20,21 +20,21 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesBindin
 @Data
 @ToString
 public class Category {
-	/**
-	 * Id
-	 */
-	@Id
-	@Column(nullable = false, length = 32, unique = true)
-	private UUID id;
-	/**
-	 * 父分类Id
-	 */
-	@Column(nullable = true, length = 32)
-	private UUID parentId;
-	/**
-	 * 分类名称
-	 */
-	@Column(nullable = true, length = 32)
-	private String name;
+    /**
+     * Id
+     */
+    @Id
+    @Column(nullable = false, unique = true)
+    private UUID id;
+    /**
+     * 父分类Id
+     */
+    @Column(nullable = true)
+    private UUID parentId;
+    /**
+     * 分类名称
+     */
+    @Column(nullable = true, length = 32)
+    private String name;
 
 }

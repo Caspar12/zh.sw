@@ -8,15 +8,12 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>zh.ms.service.parent</artifactId>
-    <name>zh.ms.service.parent</name>
     <packaging>pom</packaging>
     <properties>
         <zh.ms.persistence.contract.version>1.0.0</zh.ms.persistence.contract.version>
     </properties>
     <modules>
-        <module>../zh.ms.service.account.contract</module>
         <module>../zh.ms.service.contract.account</module>
-        <module>../zh.ms.service.contract</module>
     </modules>
     <dependencies>
         <dependency>

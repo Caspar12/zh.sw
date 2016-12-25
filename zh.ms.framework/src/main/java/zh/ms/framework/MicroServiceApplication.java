@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @SpringBootApplication
-@ComponentScan(basePackages = { "zh.ms.**.controller", "zh.ms.**.contract.api", "zh.ms.**.contract.model",
-		"zh.ms.**.contract.api.impl", "zh.ms.**.config", "zh.ms.**.aop", "zh.ms.**.listener" })
+@ComponentScan(basePackages = {"zh.ms.**.controller", "zh.ms.**.contract.api", "zh.ms.**.contract.model",
+        "zh.ms.**.contract.api.impl", "zh.ms.**.config", "zh.ms.**.aop", "zh.ms.**.listener", "zh.ms.framework"})
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

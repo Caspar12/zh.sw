@@ -7,11 +7,10 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import zh.ms.persistence.contract.Starter;
 import zh.ms.persistence.contract.account.model.Account;
-import zh.ms.persistence.contract.category.api.CategoryDao;
+import zh.ms.persistence.contract.category.api.CategoryRepository;
 import zh.ms.persistence.contract.category.model.Category;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
 import java.util.UUID;
 
 /**
@@ -25,11 +24,9 @@ import java.util.UUID;
 @Slf4j
 public class AccountRepositoryTest {
     @Resource
-    AccountDao accountDao;
+    AccountRepository accountDao;
     @Resource
-    CategoryDao categoryDao;
-    @Resource(name = "accountEntityManagerFactory")
-    EntityManagerFactory entityManagerFactory;
+    CategoryRepository categoryDao;
 
     @Test
     public void insertAdminAccount() {

@@ -2,10 +2,7 @@ package zh.ms.persistence.contract.account.model;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.ToString;
@@ -25,14 +22,14 @@ public class Account {
      * id
      */
     @Id
-    @Column(nullable = false, length = 32, unique = true)
+    @Column(nullable = false, unique = true)
     private UUID id;
     /**
      * 分类Id
      *
      * @see zh.ms.persistence.contract.category.model.Category
      */
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false)
     private UUID categoryId;
     /**
      * 账号
