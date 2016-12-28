@@ -10,8 +10,9 @@
         <module>zh.framework</module>
         <module>zh.ms.framework</module>
         <module>zh.ms.parent</module>
-        <module>zh.mybatis</module>
-        <module>zh.plugin.mybatis</module>
+        <!--<module>zh.plugin.mybatis</module>-->
+        <!--<module>zh.web.site.admin</module>-->
+
 
     </modules>
     <properties>

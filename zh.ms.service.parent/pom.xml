@@ -6,6 +6,7 @@
         <groupId>zh.sw</groupId>
         <artifactId>zh.ms.parent</artifactId>
         <version>1.0.0</version>
+        <relativePath>../zh.ms.parent</relativePath>
     </parent>
     <artifactId>zh.ms.service.parent</artifactId>
     <packaging>pom</packaging>

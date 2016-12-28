@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -23,43 +24,45 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class ApplicationReadyEventListener implements ApplicationListener<ApplicationReadyEvent> {
-	@Resource
-	private MessageSource messageSource;
+    @Autowired(required = false)
+    private MessageSource messageSource;
 
-	/*
-	 * (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.springframework.context.ApplicationListener#onApplicationEvent(org.
+     * springframework.context.ApplicationEvent)
+     */
+    /*
+     * (non-Javadoc)
 	 * 
 	 * @see
 	 * org.springframework.context.ApplicationListener#onApplicationEvent(org.
 	 * springframework.context.ApplicationEvent)
 	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.context.ApplicationListener#onApplicationEvent(org.
-	 * springframework.context.ApplicationEvent)
-	 */
-	@Override
-	public void onApplicationEvent(ApplicationReadyEvent event) {
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
 //		log.info(" init applicaton");
 
-		printI18NMessage();
+        printI18NMessage();
 
-	}
+    }
 
-	/**
-	 * 打印初始化国际化资源信息
-	 */
-	private void printI18NMessage() {
-		AbstractResourceBasedMessageSource abstractResourceBasedMessageSource = (AbstractResourceBasedMessageSource) messageSource;
+    /**
+     * 打印初始化国际化资源信息
+     */
+    private void printI18NMessage() {
+        if (messageSource == null || AbstractResourceBasedMessageSource.class.isAssignableFrom(messageSource.getClass()) == false)
+            return;
+        AbstractResourceBasedMessageSource abstractResourceBasedMessageSource = (AbstractResourceBasedMessageSource) messageSource;
 
-		List<String> resources = abstractResourceBasedMessageSource.getBasenameSet().stream()
-				.collect(Collectors.toList());
-		String fileNames = StringUtils.join(resources.toArray(), ",");
-		if (log.isInfoEnabled()) {
-			log.info("I18N load:{}", fileNames);
-		}
+        List<String> resources = abstractResourceBasedMessageSource.getBasenameSet().stream()
+                .collect(Collectors.toList());
+        String fileNames = StringUtils.join(resources.toArray(), ",");
+        if (log.isInfoEnabled()) {
+            log.info("I18N load:{}", fileNames);
+        }
 
-	}
+    }
 }

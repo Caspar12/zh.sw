@@ -2,6 +2,7 @@ package zh.ms.framework.config;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration; 
@@ -21,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class StarterConfig extends WebMvcConfigurerAdapter  {
-	@Resource
+	@Autowired(required = false)
 	private MessageSource messageSource;
 
 	@Override
@@ -42,7 +43,9 @@ public class StarterConfig extends WebMvcConfigurerAdapter  {
 	@Bean
 	public LocalValidatorFactoryBean validator() {
 		LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
-		validatorFactoryBean.setValidationMessageSource(messageSource);
+		if(messageSource!= null) {
+			validatorFactoryBean.setValidationMessageSource(messageSource);
+		}
 		return validatorFactoryBean;
 	}
 }
