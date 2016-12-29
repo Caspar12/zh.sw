@@ -6,7 +6,7 @@
         <artifactId>zh.ms.service.parent</artifactId>
         <groupId>zh.sw</groupId>
         <version>1.0.0</version>
-        <relativePath>../>zh.ms.service.parent</relativePath>
+        <relativePath>../zh.ms.service.parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

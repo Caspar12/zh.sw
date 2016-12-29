@@ -21,6 +21,7 @@
 @import url("dijit/layout/ContentPane.css");
 @import url("dijit/layout/TabContainer.css");
 
+
 /* form */
 @import url("dijit/form/Button.css");
 @import url("dijit/form/Checkbox.css");
@@ -29,6 +30,12 @@
 @import url("dijit/form/Select.css");
 @import url("dijit/form/Slider.css");
 @import url("dijit/form/TextBox.css");
+
+/* dojox */
+@import url("dojox/layout/TableContainer.css");
+
+/* widget.text */
+@import url("widget/text/AdapteText.css");
 
 /* icons */
 @import url("icons/flat-icons.css");

@@ -1,7 +1,8 @@
 package zh.web.site.admin;
 
 import org.springframework.boot.SpringApplication;
-import zh.ms.framework.MicroServiceApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 /**
  * @author 陈志杭
@@ -9,7 +10,7 @@ import zh.ms.framework.MicroServiceApplication;
  * @createdDate 2016年12月20日
  * @description
  */
-@MicroServiceApplication
+@SpringBootApplication
 public class Starter {
     public static void main(String[] args) {
 
