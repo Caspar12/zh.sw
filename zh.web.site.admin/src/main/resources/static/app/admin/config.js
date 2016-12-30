@@ -7,7 +7,8 @@ var dojoConfig = {
     //baseUrl:'',
     // An array of objects which provide the package name and location:
     packages: [
-        {name: 'admin', location: '../../../app/admin'}
+        {name: 'admin', location: '../../../app/admin'},
+        {name: 'zh', location: '../../../js/dojo/zh'},
     ],
     // map: Allows you to map paths in module identifiers to different paths:
     //map: {
@@ -28,5 +29,10 @@ var dojoConfig = {
     waitSeconds: 0,
     // cacheBust: If true, appends the time as a querystring to each module URL to avoid module caching:
     cacheBust: false,
-    tlmSiblingOfDojo: true
+    tlmSiblingOfDojo: true,
+    has: {
+        "dojo-firebug": true,
+        "dojo-debug-messages": true
+    },
+    isDebug:true
 };
