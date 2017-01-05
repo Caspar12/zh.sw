@@ -34,5 +34,6 @@ var dojoConfig = {
         "dojo-firebug": true,
         "dojo-debug-messages": true
     },
-    isDebug:true
+    isDebug: true
 };
+ 

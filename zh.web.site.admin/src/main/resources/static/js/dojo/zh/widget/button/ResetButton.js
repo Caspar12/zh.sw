@@ -5,21 +5,17 @@
  * @description
  */
 define([
-    "widget/button/Button",
+    "zh/widget/button/Button",
     "dojo/_base/declare",
 ], function (Button, declare) {
     return declare([Button], {
-        label: '提交',
+        label: '重置',
         form: null,
-        class: 'alt-primary',
-        onClick: function () {
+        onClick:function () {
             var me = this;
             var form = me.findParentForm();
-            if (form) {
-                if (form.isValid()) {
-                    var r = json.stringify(form.getValues());
-                    alert(r);
-                }
+            if(form){
+                form.reset();
             }
         }
     });

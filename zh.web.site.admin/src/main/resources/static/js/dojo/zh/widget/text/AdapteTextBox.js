@@ -5,7 +5,7 @@
  * @description
  */
 define([
-    "widget/text/TextBox",
+    "zh/widget/text/TextBox",
     "dojo/_base/declare",
 ], function (TextBox,declare) {
     return declare([TextBox], {

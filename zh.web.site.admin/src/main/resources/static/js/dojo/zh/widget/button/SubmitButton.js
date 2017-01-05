@@ -5,17 +5,19 @@
  * @description
  */
 define([
-    "widget/button/Button",
+    "zh/widget/button/Button",
     "dojo/_base/declare",
-], function (Button, declare) {
+    'dojo/json',
+], function (Button, declare, json) {
     return declare([Button], {
-        label: '重置',
+        label: '提交',
         form: null,
-        onClick:function () {
+        class: 'alt-primary',
+        onClick: function () {
             var me = this;
             var form = me.findParentForm();
-            if(form){
-                form.reset();
+            if (form) {
+                form.submit();
             }
         }
     });

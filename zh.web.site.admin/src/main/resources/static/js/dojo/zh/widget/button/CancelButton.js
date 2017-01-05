@@ -5,7 +5,7 @@
  * @description
  */
 define([
-    "widget/button/Button",
+    "zh/widget/button/Button",
     "dojo/_base/declare",
 ], function (Button, declare) {
     return declare([Button], {

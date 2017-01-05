@@ -4,9 +4,15 @@
  */
 define([
     'dijit/layout/ContentPane',
-    "dijit/_WidgetBase",
+    "zh/widget/_base/_WidgetBase",
     "dojo/_base/declare",
     //"dojo/text!./login.html"
 ], function (ContentPane, _WidgetBase, declare) {
-    return declare('zh/app/view/View', [ContentPane, _WidgetBase,], {});
+    return declare([ContentPane, _WidgetBase,], {
+        baseClass: '',
+        title: '',
+        startup: function () {
+            this.inherited(arguments);
+        }
+    });
 });

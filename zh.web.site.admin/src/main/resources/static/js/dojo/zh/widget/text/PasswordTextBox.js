@@ -5,9 +5,11 @@
  * @description
  */
 define([
-    'widget/text/AdapteTextBox',
+    'zh/widget/text/AdapteTextBox',
     'dijit/form/ValidationTextBox',
     "dojo/_base/declare",
 ], function (AdapteTextBox, ValidationTextBox, declare) {
-    return declare([AdapteTextBox, ValidationTextBox], {});
+    return declare([ AdapteTextBox,ValidationTextBox], {
+        type: 'password'
+    });
 });

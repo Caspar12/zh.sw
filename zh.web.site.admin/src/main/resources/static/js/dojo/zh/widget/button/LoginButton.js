@@ -5,7 +5,7 @@
  * @description
  */
 define([
-    "widget/button/SubmitButton",
+    "zh/widget/button/SubmitButton",
     'dojo/json',
     "dojo/_base/declare",
 
