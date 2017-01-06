@@ -9,10 +9,17 @@ require(
         'dojo/request',
         'admin/util/context',
         'zh/core',
+        'zh/widget/pagetransitions/svgloader/SvgLoader',
         "dojo/domReady!"
     ],
-    function (ViewRouter, router, request, context, zh) {
-
+    function (ViewRouter, router, request, context, zh, SvgLoader) {
+        window.svgLoader = new SvgLoader({
+            showStyle: SvgLoader.ShowStyleEnum.defalut
+        });
+        //svgLoader.placeAt(document.body);
+        // svgLoader.startup();
+        svgLoader.show();
+        return;
         var viewRouter = new ViewRouter({
             // view 根路径 m,e
             viewBaseUrl: 'admin/view',

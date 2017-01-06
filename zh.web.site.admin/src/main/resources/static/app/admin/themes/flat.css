@@ -1,0 +1,12 @@
+/* dijit base */
+@import url("../../../js/dojo/themes/flat/flat.css");
+/*  */
+@import url("../../../js/dojo/zh/widget/pagetransitions/svgloader/svgloader.css");
+
+body {
+    padding: 0px auto;
+}
+
+.pageload-overlay {
+    background: #4fc3f7;
+}

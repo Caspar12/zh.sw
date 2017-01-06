@@ -13,22 +13,27 @@ define([
         dialog: false,
         startup: function () {
             this.inherited(arguments);
-            var loginForm = new LoginForm({
+            var dialog = new Dialog({
+                title: context.app.name,
+                closable: false,
+                draggable: false
+            });
+            var frmLogin = dialog.form = new LoginForm({
                 success: function (res) {
                     context.account = res;
                     router.go('/main');
                 }
             });
 
-            var dialog = new Dialog({
-                title: context.app.name,
-                closable: false,
-                draggable: false
-            });
             this.dialog = dialog
-            loginForm.placeAt(dialog);
+            frmLogin.placeAt(dialog);
             dialog.placeAt(this);
             this.show();
+            if (context.config.isClientTestAutoLogin) {
+                frmLogin.txtAccount.set('value', 'admin');
+                frmLogin.txtPassword.set('value', 'admin');
+                frmLogin.submit();
+            }
         },
         show: function () {
             this.inherited(arguments);

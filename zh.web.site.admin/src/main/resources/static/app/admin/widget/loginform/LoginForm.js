@@ -17,11 +17,14 @@ define([
 ], function (Form, Button, ValidationTextBox, PasswordTextBox, TableContainer, LoginButton, ResetButton, ContentPane, context, router, apiConfig, declare) {
 
     return declare(Form, {
+        txtAccount: null,
+        txtPassword: null,
         action: apiConfig.identity.login,
         success: function (res) {
             context.account = res;
         },
-        postCreate: function () {
+        startup: function () {
+            this.inherited(arguments);
             var form = this;
             var table = new TableContainer({cols: 1, labelWidth: 100, showLabels: true});
             var btnSubmit = new LoginButton();
@@ -32,11 +35,13 @@ define([
                 name: 'account',
                 required: true
             });
+            this.txtAccount = txtAccount;
             var txtPassword = new PasswordTextBox({
                 label: '密 码',
                 name: 'password',
                 required: true
             });
+            this.txtPassword = txtPassword;
             table.addChild(txtAccount);
             table.addChild(txtPassword);
             btnSubmit.placeAt(bottomPane);
