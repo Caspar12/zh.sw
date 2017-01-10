@@ -3,8 +3,12 @@
  */
 define(['zh/core', 'admin/api/application', 'admin/module/config'], function (zh, application, config) {
 
+    var app = {};
+    application.getBaseInfo({sync: true}).then(function (res) {
+        app = res;
+    });
     return {
-        app: null,
+        app: app,
         config: config,
         account: null,
         isLogin: function () {

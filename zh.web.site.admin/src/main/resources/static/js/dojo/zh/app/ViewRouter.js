@@ -30,15 +30,31 @@ define([
         },
         onViewLoadBefore: false,
         onViewLoadAfter: false,
+        onViewShowBefore: null,
+        onViewShowAfter: null,
+        onBeginPageTransition: function (routeTable, route, callback) {
+
+        },
+        onEndPageTransition: null,
         // 加载完成时候 view 视图的处理
         onViewLoad: function (route) {
             if (this.onViewLoadBefore && this.onViewLoadBefore(route) === false) {
                 return;
             }
             var me = this;
+            me.onBeginPageTransition(_routeTable, route, function () {
+
+
+            });
             me.hideViews();
-            route.view.placeAt(me.getTargetNode());
-            route.view.startup();
+            if (!route.view.domNode.parent) {
+                route.view.placeAt(me.getTargetNode());
+                route.view.startup();
+            }
+            me.onViewShowBefore && me.onViewShowBefore(route);
+            route.view.show();
+            me.onEndPageTransition && me.onEndPageTransition(me._routeTable, route);
+            me.onViewShowAfter && me.onViewShowAfter(route);
             this.onViewLoadAfter && this.onViewLoadAfter(route);
         },
         onHashChange: function (newHash) {

@@ -10,50 +10,21 @@ define([
         "dojo/text!./templates/SvgLoader.html",
         'require',
         "dojo/_base/declare",
-        'zh/widget/pagetransitions/svgloader/classie',
-        'zh/widget/pagetransitions/svgloader/snap.svg-min',
+        'zh/widget/pagetransitions/svgloader/libs/classie',
+        'zh/widget/pagetransitions/svgloader/libs/snap.svg-min',
         'dojo/_base/window',
     ],
     function (_WidgetBase, _TemplatedMixin, template, require, declare, classie, Snap, window) {
-        function getTemplate() {
-            if (this._template) {
-                return this._template
-            }
-
-            var url = require.toUrl('zh/widget/pagetransitions/svgloader/templates/' + this._templateName)
-            this._template = require.getText(url);
-            return this._template;
-        }
-
-        var showStyleEnum = {
-            defalut: {
-                options: {
-                    speedIn: 500,
-                    speedOut: 500,
-                    easingOut: mina.linear,
-                    easingIn: mina.linear
-                },
-                _templateName: 'SvgLoader.html',
-                _template: template,
-                getTemplate: getTemplate
-            },
-            second: {
+        var SvgLoader = declare([_WidgetBase, _TemplatedMixin], {
+            templateString: template,
+            showStyle: {
                 options: {
                     speedIn: 400,
                     speedOut: 400,
-                    easingOut: mina.easeinout,
-                    easingIn: mina.easeinout
-                },
-                _templateName: 'second.html',
-                _template: null,
-                getTemplate: getTemplate
-            }
-
-        };
-        var SvgLoader = declare([_WidgetBase, _TemplatedMixin], {
-            templateString: template,
-            _el: null,
-            showStyle: showStyleEnum.defalut,
+                    easingOut: mina.linear,
+                    easingIn: mina.linear
+                }
+            },
             postCreate: function () {
                 this.inherited(arguments);
                 this._el = this.domNode;
@@ -80,6 +51,12 @@ define([
 
 
             },
+            onEndShow: function () {
+
+            },
+            onEndHide: function () {
+
+            },
             show: function () {
                 if (this.isAnimating) return false;
                 this.isAnimating = true;
@@ -87,6 +64,7 @@ define([
                 var self = this,
                     onEndAnimation = function () {
                         classie.addClass(self._el, 'pageload-loading');
+                        self.onEndShow && self.onEndShow();
                     };
                 this._animateSVG('in', onEndAnimation);
                 classie.add(this._el, 'show');
@@ -99,6 +77,7 @@ define([
                     self.path.attr('d', self.initialPath);
                     classie.removeClass(self._el, 'show');
                     self.isAnimating = false;
+                    self.onEndHide() && self.onEndHide();
                 });
             },
             _animateSVG: function (dir, callback) {
@@ -120,10 +99,9 @@ define([
                         });
                         pos++;
                     };
-                this.set('context', this.showStyle.getTemplate());
+
                 nextStep(pos);
             }
         });
-        SvgLoader.ShowStyleEnum = showStyleEnum;
         return SvgLoader;
     });

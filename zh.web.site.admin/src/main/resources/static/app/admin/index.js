@@ -1,5 +1,6 @@
 /**
  * Created by 陈志杭 on 2016/12/27.
+ * @file admin/index.js
  */
 require(
     [
@@ -9,17 +10,11 @@ require(
         'dojo/request',
         'admin/util/context',
         'zh/core',
-        'zh/widget/pagetransitions/svgloader/SvgLoader',
+        'admin/util/pageTransitionsUtil',
         "dojo/domReady!"
     ],
-    function (ViewRouter, router, request, context, zh, SvgLoader) {
-        window.svgLoader = new SvgLoader({
-            showStyle: SvgLoader.ShowStyleEnum.defalut
-        });
-        //svgLoader.placeAt(document.body);
-        // svgLoader.startup();
-        svgLoader.show();
-        return;
+    function (ViewRouter, router, request, context, zh, pageTransitionsUtil) {
+
         var viewRouter = new ViewRouter({
             // view 根路径 m,e
             viewBaseUrl: 'admin/view',
@@ -31,6 +26,12 @@ require(
                     router.go('/login');
                     return false;
                 }
+            },
+            onBeginPageTransition: function () {
+                pageTransitionsUtil.show();
+            },
+            onEndPageTransition: function () {
+                pageTransitionsUtil.hide()
             }
         });
         viewRouter.startup();
