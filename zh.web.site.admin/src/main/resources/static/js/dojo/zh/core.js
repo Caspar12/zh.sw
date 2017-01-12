@@ -9,11 +9,6 @@ define([], function () {
         isUndefined: function (value) {
             return typeof(value) === 'undefined';
         },
-        stringUtils: {
-            isEqualsIgnoreCase: function (str1, str2) {
-                return (str1 === null && str2 === null) || (zh.isUndefined(str1) && zh.isUndefined(str2)) || str1.toUpperCase() === str2.toUpperCase();
-            }
-        },
         thread:{
             sleep:function (milliseconds) {
                 var start = new Date().getTime();

@@ -6,7 +6,7 @@
  */
 define([
     "zh/widget/form/Form",
-    "admin/module/request",
+    "admin/util/request",
     "dojo/_base/declare",
 ], function (Form, request, declare) {
     return declare([Form], {

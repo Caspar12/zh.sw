@@ -13,6 +13,7 @@ define([
         label: '提交',
         form: null,
         class: 'alt-primary',
+        type: 'submit',
         onClick: function () {
             var me = this;
             var form = me.findParentForm();

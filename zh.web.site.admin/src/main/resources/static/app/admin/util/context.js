@@ -12,7 +12,7 @@ define(['zh/core', 'admin/api/application', 'admin/module/config'], function (zh
         config: config,
         account: null,
         isLogin: function () {
-            return this.account !== false;
+            return this.account !== null;
         }
     }
 });

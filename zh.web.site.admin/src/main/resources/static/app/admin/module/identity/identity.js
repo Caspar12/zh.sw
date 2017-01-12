@@ -3,10 +3,10 @@
  */
 define(['zh/core', 'dojo/cookie', 'dojo/request', 'admin/api/account'], function (zh, cookie, request, account) {
     var identity = {
-        _account: false,
-        _token: false,
+        _account: null,
+        _token: null,
         isLogin: function () {
-            return zh.isUndefined(this._account);
+            return this._account !== null;
         },
         setAccount: function (account) {
             this._account = account;

@@ -28,38 +28,75 @@ define([
             if (!routeUrl) routeUrl = me.defaultViewModulePath;
             me.onHashChange(routeUrl);
         },
-        onViewLoadBefore: false,
-        onViewLoadAfter: false,
-        onViewShowBefore: null,
-        onViewShowAfter: null,
-        onBeginPageTransition: function (routeTable, route, callback) {
+        // view加载显示之前事件,可以返回false阻止继续执行
+        onViewLoadBefore: function (route) {
+            return true;
+        },
+        // view加载显示之后事件
+        onViewLoadAfter: function (route) {
 
         },
-        onEndPageTransition: null,
+        // view显示之前事件
+        onViewShowBefore: function (route) {
+
+        },
+        // view显示之后事件
+        onViewShowAfter: function (route) {
+
+        },
+        /**
+         * view加载动画结束回调事件
+         * @param route 目标路由
+         */
+        onViewLoadingAnimateEndCallback: function (route) {
+            var me = this;
+            me.onViewShowBefore(route);
+            me.hideViews();
+            route.view.show();
+            me.startViewLoadingEndAnimate(route)
+        },
+        /**
+         * 启动view加载动画
+         * @param route 目标路由
+         */
+        startViewLoadingAnimate: function (route) {
+            this.onViewLoadingAnimateEndCallback(route);
+        },
+        /**
+         * view加载完成动画结束回调事件
+         * @param route 目标路由
+         */
+        onViewLoadingEndAnimateEndCallback: function (route) {
+            this.onViewShowAfter(route);
+        },
+        /**
+         * 启动view加载结束动画
+         * @param route 目标路由
+         */
+        startViewLoadingEndAnimate: function (route) {
+            this.onViewLoadingEndAnimateEndCallback(route);
+        },
         // 加载完成时候 view 视图的处理
         onViewLoad: function (route) {
-            if (this.onViewLoadBefore && this.onViewLoadBefore(route) === false) {
-                return;
-            }
             var me = this;
-            me.onBeginPageTransition(_routeTable, route, function () {
-
-
-            });
-            me.hideViews();
-            if (!route.view.domNode.parent) {
+            if (!route.view.domNode.parentElement) {
                 route.view.placeAt(me.getTargetNode());
                 route.view.startup();
+                route.view.hide();
             }
-            me.onViewShowBefore && me.onViewShowBefore(route);
-            route.view.show();
-            me.onEndPageTransition && me.onEndPageTransition(me._routeTable, route);
-            me.onViewShowAfter && me.onViewShowAfter(route);
-            this.onViewLoadAfter && this.onViewLoadAfter(route);
+            me.startViewLoadingAnimate(route);
+
+        },
+        go: function (newHash) {
+            hash(newHash);
         },
         onHashChange: function (newHash) {
             var me = this;
+
             var route = me._convertToRoute(newHash);
+            if (this.onViewLoadBefore(route) === false) {
+                return;
+            }
             var preRoute = linq.From(me._routeTable).FirstOrDefault(null, 'p=>p.viewModulePath=="' + route.viewModulePath + '"');
             if (preRoute != null) {
                 me.onViewLoad(preRoute);

@@ -29,7 +29,9 @@ define([
         },
         submit: function () {
             var me = this;
-            if (me.validate() === false)  return;
+            event.preventDefault();
+            event.stopPropagation();
+            if (me.validate() === false) return;
             var params = me.get('value');
             if (me.isAjax) {
                 me.promise = me.createPromise(params);

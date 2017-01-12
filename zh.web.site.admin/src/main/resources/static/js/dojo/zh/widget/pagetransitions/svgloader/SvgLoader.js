@@ -48,28 +48,20 @@ define([
                 this.closingStepsTotal = closingStepsStr ? this.closingSteps.length : 0;
 
                 this.isAnimating = false;
-
-
             },
-            onEndShow: function () {
-
-            },
-            onEndHide: function () {
-
-            },
-            show: function () {
+            show: function (callback) {
                 if (this.isAnimating) return false;
                 this.isAnimating = true;
                 // animate svg
                 var self = this,
                     onEndAnimation = function () {
                         classie.addClass(self._el, 'pageload-loading');
-                        self.onEndShow && self.onEndShow();
+                        callback && callback();
                     };
                 this._animateSVG('in', onEndAnimation);
                 classie.add(this._el, 'show');
             },
-            hide: function () {
+            hide: function (callback) {
                 var self = this;
                 classie.removeClass(this._el, 'pageload-loading');
                 this._animateSVG('out', function () {
@@ -77,7 +69,7 @@ define([
                     self.path.attr('d', self.initialPath);
                     classie.removeClass(self._el, 'show');
                     self.isAnimating = false;
-                    self.onEndHide() && self.onEndHide();
+                    callback && callback();
                 });
             },
             _animateSVG: function (dir, callback) {

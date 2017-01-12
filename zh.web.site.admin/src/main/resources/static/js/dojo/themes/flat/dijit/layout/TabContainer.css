@@ -272,6 +272,7 @@
 }
 .dijitTabListContainer-top .tabStripButton {
   margin-bottom: 1px;
+  outline:none;
 }
 .dijitTabListContainer-bottom .tabStripButton {
   margin-top: 1px;

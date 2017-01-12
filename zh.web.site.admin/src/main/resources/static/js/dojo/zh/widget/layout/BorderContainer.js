@@ -5,7 +5,7 @@
  * @description
  */
 define([
-    'dijit/layout/BorderContainer',
+    'dojox/layout/BorderContainer',
     "dojo/_base/declare",
 ], function (BorderContainer, declare) {
     return declare([BorderContainer], {});

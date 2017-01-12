@@ -33,13 +33,15 @@ define([
             var txtAccount = new ValidationTextBox({
                 label: '账 号',
                 name: 'account',
-                required: true
+                required: true,
+                style: {width: '200px'}
             });
             this.txtAccount = txtAccount;
             var txtPassword = new PasswordTextBox({
                 label: '密 码',
                 name: 'password',
-                required: true
+                required: true,
+                style: {width: '200px'}
             });
             this.txtPassword = txtPassword;
             table.addChild(txtAccount);

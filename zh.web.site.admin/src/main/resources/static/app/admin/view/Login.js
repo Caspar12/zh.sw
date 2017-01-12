@@ -6,9 +6,10 @@ define([
     'admin/widget/loginform/LoginForm',
     'dijit/Dialog',
     'admin/util/context',
-    'dojo/router',
+    'admin/util/viewRouter',
     "dojo/_base/declare",
-], function (PageView, LoginForm, Dialog, context, router, declare) {
+
+], function (PageView, LoginForm, Dialog, context, viewRouter, declare) {
     return declare(PageView, {
         dialog: false,
         startup: function () {
@@ -21,19 +22,14 @@ define([
             var frmLogin = dialog.form = new LoginForm({
                 success: function (res) {
                     context.account = res;
-                    router.go('/main');
+                    viewRouter.go('/main');
+                    context.viewRouter;
                 }
             });
 
             this.dialog = dialog
             frmLogin.placeAt(dialog);
             dialog.placeAt(this);
-            this.show();
-            if (context.config.isClientTestAutoLogin) {
-                frmLogin.txtAccount.set('value', 'admin');
-                frmLogin.txtPassword.set('value', 'admin');
-                frmLogin.submit();
-            }
         },
         show: function () {
             this.inherited(arguments);

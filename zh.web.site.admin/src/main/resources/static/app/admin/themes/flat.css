@@ -1,12 +1,24 @@
+
+@import url("../../../js/dojo/themes/resources/font-awesome/css/font-awesome.min.css");
 /* dijit base */
 @import url("../../../js/dojo/themes/flat/flat.css");
 /*  */
 @import url("../../../js/dojo/zh/widget/pagetransitions/svgloader/svgloader.css");
 
-body {
-    padding: 0px auto;
+* {
+    outline: none;
+}
+html body {
+    margin: 0 auto;
+    padding: 0 auto;
 }
 
 .pageload-overlay {
-    background: #4fc3f7;
+    /*# background: #4fc3f7;*/
+}
+.flat .dijitContentPane{
+    padding: 0 0 0 0;
+}
+.flat .main_layout_top{
+    background-color: #2196f3;
 }
