@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>application title</title>
+    <link rel="stylesheet" href="../themes/flat/flat.css">
+    <script src="config.js"></script>
+    <script src="../dojo/dojo.js"></script>
+
+</head>
+<body class="flat">
+<input type="button" onclick="a();" value="s"/>
+</body>
+</html>
+
+<script>
+    function a() {
+        require(['admin/util/tipUtils'], function (tipUtils) {
+//        var dialog = new Dialog({
+//            modal: true,
+//            showTitle: false,
+//            closable: false,
+//            content: 'asdlfj;aslkdfj'
+//        });
+//        dialog.show();
+            tipUtils.success("su");
+
+        });
+    }
+
+
+</script>

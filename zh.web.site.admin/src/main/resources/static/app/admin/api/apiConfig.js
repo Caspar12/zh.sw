@@ -5,7 +5,7 @@ define([], function () {
     return {
         application: {
             getBaseInfo: '/api/application/getBaseInfo',
-            getMenu: 'api/application/getMenu',
+            getMenus: '/api/application/getMenus',
         },
         identity: {
             login: '/api/identity/login'

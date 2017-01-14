@@ -6,8 +6,8 @@ define(['admin/util/request', 'admin/api/apiConfig'], function (request, apiConf
         getBaseInfo: function (options) {
             return request(apiConfig.application.getBaseInfo, options);
         },
-        getMenu: function (options) {
-            return request(apiConfig.application.getMenu, options);
+        getMenus: function (options) {
+            return request(apiConfig.application.getMenus, options);
         }
     };
 });

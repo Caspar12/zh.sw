@@ -1,6 +1,5 @@
 /* dijit base */
 @import url("flat_dijit.css");
-
 /* dijit */
 @import url("dijit/Calendar.css");
 @import url("dijit/ColorPalette.css");
@@ -13,15 +12,12 @@
 @import url("dijit/TimePicker.css");
 @import url("dijit/TitlePane.css");
 @import url("dijit/Toolbar.css");
-@import url("dijit/Tree.css"); 
-
+@import url("dijit/Tree.css");
 /* layout */
 @import url("dijit/layout/AccordionContainer.css");
 @import url("dijit/layout/BorderContainer.css");
 @import url("dijit/layout/ContentPane.css");
 @import url("dijit/layout/TabContainer.css");
-
-
 /* form */
 @import url("dijit/form/Button.css");
 @import url("dijit/form/Checkbox.css");
@@ -30,15 +26,37 @@
 @import url("dijit/form/Select.css");
 @import url("dijit/form/Slider.css");
 @import url("dijit/form/TextBox.css");
-
 /* dojox */
 @import url("dojox/layout/TableContainer.css");
-
 /* widget.text */
 @import url("widget/text/AdapteText.css");
-
 /* icons */
 @import url("icons/flat-icons.css");
-
 /* rtl */
 @import url("flat_rtl.css");
+@import url("../resources/bootstrap/bootstrap.css");
+@import url("../resources/bootstrap/animate.min.css");
+/* zh */
+@import url("zh/widget/layout/NormalFrameworkContainer.css");
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    font: 12px Myriad, Helvetica, Tahoma, Arial, clean, sans-serif;
+}
+
+* {
+    outline: none;
+}
+
+.flat .dijitTreeExpandoClosed:before{
+    content: "\f005"
+}
+.flat .dijitTreeExpandoOpened:before{
+    content: "\f006"
+}

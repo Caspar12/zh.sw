@@ -1,9 +1,10 @@
 /**
  * Created by 陈志杭 on 2016/12/27.
+ * @file admin/view/Login
  */
 define([
     'zh/app/view/PageView',
-    'admin/widget/loginform/LoginForm',
+    'admin/widget/login-form/LoginForm',
     'dijit/Dialog',
     'admin/util/context',
     'admin/util/viewRouter',

@@ -3,7 +3,7 @@
  * @contact 279397942@qq.com
  * @date 2016/12/29
  * @description
- * @file admin/widget/form/Form
+ * @file admin/view-partial/List
  */
 define([
     "zh/widget/form/Form",

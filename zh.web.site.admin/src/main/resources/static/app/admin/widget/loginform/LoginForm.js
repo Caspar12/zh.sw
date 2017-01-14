@@ -1,5 +1,6 @@
 /**
  * Created by 陈志杭 on 2016/12/27.
+ * @file admin/widget/login-form/LoginForm
  */
 define([
     "admin/widget/form/Form",

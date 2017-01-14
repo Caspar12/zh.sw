@@ -5,20 +5,6 @@
 /*  */
 @import url("../../../js/dojo/zh/widget/pagetransitions/svgloader/svgloader.css");
 
-* {
-    outline: none;
-}
-html body {
-    margin: 0 auto;
-    padding: 0 auto;
-}
-
-.pageload-overlay {
-    /*# background: #4fc3f7;*/
-}
 .flat .dijitContentPane{
     padding: 0 0 0 0;
-}
-.flat .main_layout_top{
-    background-color: #2196f3;
 }

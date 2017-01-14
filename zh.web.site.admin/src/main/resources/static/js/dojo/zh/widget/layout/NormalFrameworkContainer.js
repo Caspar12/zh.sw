@@ -12,12 +12,20 @@ define([
     'dojox/layout/ExpandoPane',
     'zh/widget/layout/ContentPane',
     'dijit/TitlePane',
+    'zh/widget/layout/NormalFrameworkContainerTop',
+
+    'dojox/mvc/sync',
     'dojo/dom-geometry',
     'dojo/dom-style',
     'dojo/window',
     "dojo/_base/declare",
-], function (BorderContainer, AccordionContainer, TabContainer, ExpandoPane, ContentPane, TitlePane, domGeometry, domStyle, winUtils, declare) {
+], function (BorderContainer, AccordionContainer, TabContainer, ExpandoPane, ContentPane, TitlePane, NormalFrameworkContainerTop, sync, domGeometry, domStyle, winUtils, declare) {
     return declare([BorderContainer], {
+        /**
+         * top container title
+         */
+        title: '',
+        class: 'NormalFrameworkContainer',
         gutters: false,
         liveSplitters: true,
         postCreate: function () {
@@ -29,6 +37,7 @@ define([
             this.addChild(this._createRightContainer());
         },
         startup: function () {
+            var me = this;
             this.inherited(arguments);
             this.resize();
         },
@@ -67,14 +76,9 @@ define([
             return mainContainer;
         },
         _createTopContainer: function () {
-            var topContainer = new ContentPane({
-                region: "top",
-                style: "height: 49px",
-                splitter: false,
-                class: 'main_layout_top',
-                gutter: false
-            });
+            var topContainer = new NormalFrameworkContainerTop({});
             this.top = topContainer;
+            sync(this, 'title', topContainer, 'title');
             return topContainer;
         },
         _createBottomContainer: function () {

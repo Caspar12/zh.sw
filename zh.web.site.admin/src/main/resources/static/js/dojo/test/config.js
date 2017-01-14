@@ -13,9 +13,9 @@ var dojoConfig = {
     ],
     // map: Allows you to map paths in module identifiers to different paths:
     // map: {
-    //     dijit16: {
-    //         dojo: "dojo16"
-    //     }
+    //     jquery: {
+    //         jquery: "jquery/jquery"
+    //     },
     // },
     // Defines if Dojo core should be loaded asynchronously.
     // Values can be true, false or legacyAsync, which puts the loader permanently in legacy cross-domain mode.
@@ -36,6 +36,6 @@ var dojoConfig = {
         "dojo-firebug": true,
         "dojo-debug-messages": true
     },
-    isDebug: false
+    isDebug: true
 };
  

@@ -4,10 +4,9 @@
  */
 define([
     'admin/util/pageTransitionsUtils',
-    'dmin/module/config',
-    'dojo/dojo',
-], function (pageTransitionsUtils, config, dojo) {
-    var circleLoading = new CircleLoading();
+    'admin/module/config',
+    'dojo/_base/lang',
+], function (pageTransitionsUtils, config,  lang) {
     return {
         pageTransitionsUtils: pageTransitionsUtils,
         _showCount: 0,
@@ -21,7 +20,7 @@ define([
                 me._showCount = 0;
             }
             me._showCount++;
-            options = dojo.delegate({
+            options = lang.delegate({
                 timeout: config.defaultShowLoadingAnimateTimeout
             }, options);
             pageTransitionsUtils.show();

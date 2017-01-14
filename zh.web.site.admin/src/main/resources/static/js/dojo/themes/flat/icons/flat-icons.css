@@ -143,12 +143,14 @@
 .dijitFolderClosed:before,
 .dijitIconFolderClosed:before,
 .flat-folder:before {
-  content: "\f020";
+  content: "\f114";
+  font-family: FontAwesome;
 }
 .dijitFolderOpened:before,
 .dijitIconFolderOpen:before,
 .flat-folder-open:before {
-  content: "\f021";
+  content: "\f115";
+  font-family: FontAwesome;
 }
 .dijitIconEdit:before,
 .flat-edit:before {
@@ -171,7 +173,8 @@
 }
 .dijitLeaf:before,
 .flat-page:before {
-  content: "\f026";
+  content: "\f016";
+  font-family: FontAwesome;
 }
 .flat-page-o:before {
   content: "\f027";
