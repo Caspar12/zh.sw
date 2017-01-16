@@ -79,6 +79,7 @@ define([
             var topContainer = new NormalFrameworkContainerTop({});
             this.top = topContainer;
             sync(this, 'title', topContainer, 'title');
+            sync(this, 'subTitle', topContainer, 'subTitle');
             return topContainer;
         },
         _createBottomContainer: function () {
@@ -115,5 +116,12 @@ define([
             this.right = rightContainer;
             return rightContainer;
         },
+        /**
+         *
+         * @param menuItem   zh/widget/menu/MenuItem
+         */
+        addTooltipDialogMenuItem: function (menuItem) {
+            this.top.addTooltipDialogMenuItem(menuItem);
+        }
     });
 });

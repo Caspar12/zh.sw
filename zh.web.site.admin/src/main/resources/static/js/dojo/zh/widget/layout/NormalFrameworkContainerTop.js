@@ -23,12 +23,18 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             var topTitle = new NormalFrameworkContainerTopTitle();
-            topTitle.startup();
             topTitle.placeAt(this);
+            topTitle.startup();
+            this.topTitle = topTitle;
             sync(this, 'title', topTitle, 'title');
-            ready(function () {
-                parser.parse();
-            });
+            sync(this, 'subTitle', topTitle, 'subTitle');
+        },
+        /**
+         *
+         * @param menuItem   zh/widget/menu/MenuItem
+         */
+        addTooltipDialogMenuItem: function (menuItem){
+            this.topTitle.addTooltipDialogMenuItem(menuItem);
         }
     });
 });

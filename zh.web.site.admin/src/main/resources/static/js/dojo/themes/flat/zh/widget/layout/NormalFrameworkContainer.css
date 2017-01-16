@@ -32,9 +32,10 @@
 }
 .flat .NormalFrameworkContainerTop .TopTitle .right .button{
     overflow: hidden;
-    height: 46px;
-    line-height: 46px;
+    margin:0 0 0 0;
 }
 .flat .NormalFrameworkContainerTop .TopTitle .right .button .dijitButtonNode{
     background-color: #2196f3;
+    border: none;
+
 }

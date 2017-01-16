@@ -9,24 +9,41 @@
 
 </head>
 <body class="flat">
-<input type="button" onclick="a();" value="s"/>
+<div id="kkkk">alsdfjasdlfkjasdf</div>
 </body>
 </html>
 
 <script>
-    function a() {
-        require(['admin/util/tipUtils'], function (tipUtils) {
-//        var dialog = new Dialog({
-//            modal: true,
-//            showTitle: false,
-//            closable: false,
-//            content: 'asdlfj;aslkdfj'
-//        });
-//        dialog.show();
-            tipUtils.success("su");
 
+    require([
+
+        'dijit/form/DropDownButton',
+        'dijit/TooltipDialog',
+        'dijit/DropDownMenu',
+        'dijit/MenuItem',
+        "dijit/popup",
+        "dojo/on",
+        "dojo/ready",
+        "dojo/parser",
+        'dojo/dom',
+        "dojo/_base/declare",
+        "dojo/domReady!",], function (DropDownButton, TooltipDialog, DropDownMenu, MenuItem, popup, on, ready, parser, dom, declare) {
+
+        var tooltipDialog = new TooltipDialog({
+            style: "width: 300px;",
+            content: 'alsdfjasldfkjasdf'
         });
-    }
+
+
+        var node =document.getElementById('kkkk');//  dom.byId('kkkk');
+        on(node, 'mouseover', function () {
+            popup.open({
+                popup: tooltipDialog,
+                around: node
+            });
+        });
+
+    });
 
 
 </script>

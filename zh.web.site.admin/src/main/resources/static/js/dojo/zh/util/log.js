@@ -6,9 +6,17 @@
  */
 define([], function () {
     return {
-        info: console.info,
-        error: console.error,
-        debug: console.debug,
-        warn: console.warn
+        info: function (msg) {
+            console.info(msg);
+        },
+        error: function (msg) {
+            console.error(msg);
+        },
+        debug: function (msg) {
+            console.debug(msg);
+        },
+        warn: function (msg) {
+            console.warn(msg);
+        },
     };
 });

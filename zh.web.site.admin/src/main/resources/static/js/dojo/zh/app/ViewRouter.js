@@ -92,7 +92,6 @@ define([
         },
         onHashChange: function (newHash) {
             var me = this;
-
             var route = me._convertToRoute(newHash);
             if (this.onViewLoadBefore(route) === false) {
                 return;

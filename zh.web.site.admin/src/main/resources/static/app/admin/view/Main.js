@@ -9,24 +9,41 @@ define([
     'zh/widget/Tree',
     "dojo/store/Memory",
     "dijit/tree/ObjectStoreModel",
-    "dijit/tree/ForestStoreModel",
-    "dojo/store/Observable",
+    'zh/widget/menu/MenuItem',
+    'admin/widget/dialog/ModifyPasswordFormDialog',
     "admin/api/application",
+    'dojo/_base/lang',
     'admin/util/context',
     "dojo/_base/declare",
-], function (PageView, Dialog, NormalFrameworkContainer, Tree, Memory, ObjectStoreModel, ForestStoreModel, Observable, application, context, declare) {
+], function (PageView, Dialog, NormalFrameworkContainer, Tree, Memory, ObjectStoreModel, MenuItem, ModifyPasswordFormDialog, application, lang, context, declare) {
     return declare(PageView, {
         isAutoFillToParentNode: true,
         startup: function () {
             this.inherited(arguments);
-            var container = new NormalFrameworkContainer();
-            this._createLeftMenuTree();
-            container.set('title', context.app.name);
+            var container = this.container = new NormalFrameworkContainer();
             container.placeAt(this);
             container.startup();
+            container.set('subTitle', lang.getObject('account.name', false, context) || '');
+            this._createLeftMenuTree();
+            container.set('title', context.app.name);
+            container.addTooltipDialogMenuItem(new MenuItem({
+                label: '修改密码',
+                onClick: function () {
+                    var modifyPasswordFormDialog = new ModifyPasswordFormDialog();
+                    modifyPasswordFormDialog.show();
+                }
+            }));
+            container.addTooltipDialogMenuItem(new MenuItem({
+                label: '退出',
+                onClick: function () {
+                    console.info('退出');
+                }
+            }));
+
             window.container = container;
         },
         _createLeftMenuTree: function () {
+            var me = this;
             application.getMenus().success(function (res) {
                 var root = {id: null, name: 'root', parentId: -1};
                 res.push(root);
@@ -47,7 +64,7 @@ define([
                     model: myModel,
                     showRoot: false,
                 });
-                container.left.addChild(tree);
+                me.container.left.addChild(tree);
                 tree.startup();
             });
 

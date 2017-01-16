@@ -9,23 +9,42 @@ define([
         'zh/widget/_base/_WidgetBase',
         "dijit/_TemplatedMixin",
         'dojo/text!./templates/normal-framework-container/NormalFrameworkContainerTopTitle.html',
-        'dijit/form/DropDownButton',
         'dijit/TooltipDialog',
-        "dojo/ready",
-        "dojo/parser",
-        "dojo/_base/declare",
-
-    ], function (_WidgetBase, _TemplatedMixin, template, DropDownButton,TooltipDialog, ready, parser, declare) {
-
+        'zh/widget/menu/MenuItem',
+        "dijit/popup",
+        "dojo/on",
+        "dojo/_base/declare"
+    ], function (_WidgetBase, _TemplatedMixin, template, TooltipDialog, MenuItem, popup, on, declare) {
         return declare([_WidgetBase, _TemplatedMixin], {
             templateString: template,
             title: '',
             _setTitleAttr: {node: 'titleNode', type: 'innerHTML'},
+            subTitle: '',
+            _setSubTitleAttr: {node: 'subTitleNode', type: 'innerHTML'},
             postCreate: function () {
+                var me = this;
                 this.inherited(arguments);
-                var dropDownButton = new DropDownButton();
-                var tooltipDialog = new TooltipDialog();
-                dropDownButton
+                var tooltipDialog = this.tooltipDialog = new TooltipDialog({
+                    class: 'NormalFrameworkContainerTopPopupMenu',
+                    onMouseLeave: function () {
+                        popup.close(this);
+                    }
+                });
+
+                on(me.subTitleNode, 'mouseover', function () {
+                    popup.open({
+                        parent: me,
+                        popup: tooltipDialog,
+                        around: me.subTitleNode,
+                    });
+                });
+            },
+            /**
+             *
+             * @param menuItem   zh/widget/menu/MenuItem
+             */
+            addTooltipDialogMenuItem: function (menuItem) {
+                this.tooltipDialog.addChild(menuItem);
             }
         });
     }

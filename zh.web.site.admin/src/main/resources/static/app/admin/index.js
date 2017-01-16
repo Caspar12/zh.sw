@@ -2,6 +2,9 @@
  * Created by 陈志杭 on 2016/12/27.
  * @file admin/index.js
  */
+require.on('error', function () {
+    console.info(arguments);
+});
 require(['admin/util/pageTransitionsUtils',
         'zh/widget/layout/NormalFrameworkContainer'
     ],

@@ -38,6 +38,7 @@
 @import url("../resources/bootstrap/animate.min.css");
 /* zh */
 @import url("zh/widget/layout/NormalFrameworkContainer.css");
+
 html, body {
     height: 100%;
     width: 100%;
@@ -54,9 +55,24 @@ body {
     outline: none;
 }
 
-.flat .dijitTreeExpandoClosed:before{
+.flat .dijitTreeExpandoClosed:before {
     content: "\f005"
 }
-.flat .dijitTreeExpandoOpened:before{
+
+.flat .dijitTreeExpandoOpened:before {
     content: "\f006"
+}
+
+.flat .NormalFrameworkContainerTopPopupMenu .dijitTooltipContainer {
+    padding: 0 0 0 0;
+}
+
+.flat .dijitTextBox .dijitInputInner, .flat .dijitValidationTextBox .dijitValidationContainer, .flat .dijitTextBox .dijitInputField .dijitPlaceHolder {
+    padding: 4px 0px 4px 0px;
+
+}
+
+.flat .tableContainer-table {
+    border-collapse: separate;
+    border-spacing: 0px 5px;
 }

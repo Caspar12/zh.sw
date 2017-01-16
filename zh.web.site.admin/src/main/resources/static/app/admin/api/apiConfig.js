@@ -9,6 +9,9 @@ define([], function () {
         },
         identity: {
             login: '/api/identity/login'
+        },
+        account: {
+            updatePassword: '/api/account/updatePassword'
         }
     };
 });

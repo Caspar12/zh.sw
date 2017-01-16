@@ -11,6 +11,7 @@
     {
       "id": 10001,
       "name": "用户列表",
+      "url": "/account/list",
       "parentId": 1
     },
     {
