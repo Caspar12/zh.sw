@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public abstract class ExceptionUtil {
+public abstract class ExceptionUtils {
 
     public static Throwable getRootCause(Throwable throwable) {
         Throwable cause;

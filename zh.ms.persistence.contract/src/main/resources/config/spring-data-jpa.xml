@@ -45,7 +45,7 @@
     <tx:annotation-driven transaction-manager="accountTransactionManager"/>
     <jpa:repositories base-package="${zh.datasources.account.jpa.repository.packagesToScan}"
                       entity-manager-factory-ref="accountEntityManagerFactory"
-                      transaction-manager-ref="accountTransactionManager"/>
+                      transaction-manager-ref="accountTransactionManager" />
 
 
     <!-- category数据库配置 -->

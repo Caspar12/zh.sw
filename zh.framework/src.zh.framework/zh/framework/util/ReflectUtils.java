@@ -29,6 +29,12 @@ import javassist.bytecode.CodeAttribute;
 import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
 
+/**
+ * @author 陈志杭
+ * @contact 279397942@qq.com
+ * @date 2015/1/21
+ * @description 反射类帮助类
+ */
 public class ReflectUtils {
 
 	/**
@@ -311,7 +317,7 @@ public class ReflectUtils {
 	/**
 	 * 获取类类型第index个泛型类型
 	 * 
-	 * @param pBeanClass
+	 * @param pClass
 	 *            类类型
 	 * @param index
 	 *            第几个泛型
