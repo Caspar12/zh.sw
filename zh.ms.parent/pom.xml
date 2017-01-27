@@ -14,9 +14,9 @@
         <zh.ms.framework.basedir>${project.basedir}/../zh.ms.framework</zh.ms.framework.basedir>
     </properties>
     <modules>
-        <module>../zh.ms.service.parent</module>
+        <!--<module>../zh.ms.service.parent</module>-->
         <module>../zh.ms.infrastructure.parent</module>
-        <module>../zh.ms.persistence.parent</module>
+        <!--<module>../zh.ms.persistence.parent</module>-->
         <module>../zh.web.site.admin</module>
     </modules>
 

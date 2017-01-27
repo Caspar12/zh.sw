@@ -30,11 +30,25 @@ define([
         var defaultComplete = function () {
             uiUtils.hideLoading();
         };
+        var defaultSuccess = function (res,bizSuccess) {
+            if (res.success) {
+                bizSuccess && bizSuccess(res.data);
+            } else {
+                tipUtils.warning(res.message);
+            }
+        };
         option = option || {};
         return {
+            /**
+             * 发送实际请求
+             * @param success 业务成为回调函数
+             * @param error 可空
+             * @param process 可空
+             */
             then: function (success, error, process) {
                 error = error || defaultError;
                 process = process || defaultProcess;
+
                 if (option.method) {
                     option.method = option.method.toUpperCase();
                 }
@@ -54,16 +68,12 @@ define([
                 }
                 var promise = request(url, newOpt);
                 promise.always(defaultComplete);
-                promise.then(success, error, process);
+                promise.then(function (res) {
+                    defaultSuccess(res,success);
+                }, error, process);
             },
             success: function (callback) {
-                this.then(function (res) {
-                    if (res.success) {
-                        callback && callback(res.data);
-                    } else {
-                        tipUtils.warning(res.message);
-                    }
-                });
+                this.then(callback);
             }
         };
     }

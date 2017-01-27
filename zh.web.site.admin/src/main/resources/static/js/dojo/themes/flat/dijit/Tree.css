@@ -44,6 +44,7 @@
   -o-transition-timing-function: ease-out;
   -ms-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
+  
 }
 .flat .dijitTreeRowHover {
   background-color: #f2f2f2;
@@ -89,6 +90,7 @@
   margin-right: 4px;
   color: #2196f3;
   vertical-align: middle;
+  
 }
 .flat .dijitTreeExpandoOpened:before {
   content: "\f012";
@@ -96,6 +98,7 @@
 }
 .flat .dijitTreeExpandoClosed:before {
   content: "\f011";
+  cursor: pointer;
 }
 .flat .dijitTreeExpandoLoading {
   -webkit-animation: spinning 2s linear infinite;

@@ -31,9 +31,9 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             this.addChild(this._createMainContainer());
-            this.addChild(this._createTopContainer());
+            this._createTopContainer();
             this.addChild(this._createBottomContainer());
-            this.addChild(this._createLeftContainer());
+            this._createLeftContainer();
             this.addChild(this._createRightContainer());
         },
         startup: function () {
@@ -79,8 +79,8 @@ define([
             var topContainer = new NormalFrameworkContainerTop({});
             this.top = topContainer;
             sync(this, 'title', topContainer, 'title');
-            sync(this, 'subTitle', topContainer, 'subTitle');
-            return topContainer;
+            sync(this, 'subTitle', topContainer, 'subTitle');;
+            this.addChild(this.top);
         },
         _createBottomContainer: function () {
             var bottomContainer = new ContentPane({
@@ -95,16 +95,23 @@ define([
             return bottomContainer;
         },
         _createLeftContainer: function () {
-            var leftContainer = new ContentPane({
+            var accordionContainer = new AccordionContainer({
                 region: "left",
                 style: "width: 200px",
                 splitter: true,
+                class:'NormalFrameworkContainerLeft',
                 gutter: true,
                 minSize: 100,
             });
 
+            var firstContainer = new ContentPane({
+                title: '功能菜单'
+            });
+            accordionContainer.addChild(firstContainer);
 
+            var leftContainer = firstContainer;
             this.left = leftContainer;
+            this.addChild(accordionContainer);
             return leftContainer;
         },
         _createRightContainer: function () {
