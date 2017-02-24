@@ -1,28 +1,22 @@
 package zh.ms.framework.aop;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+import zh.framework.model.GenericResponse;
+import zh.framework.util.ExceptionUtils;
+import zh.framework.util.JsonUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import javassist.CannotCompileException;
-import javassist.NotFoundException;
-import zh.framework.model.ExecResult;
-import zh.framework.util.JsonUtils;
-import zh.framework.util.LogUtils;
-import zh.framework.util.ReflectUtils;
+import javax.validation.ValidationException;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * @author 陈志杭
@@ -30,78 +24,122 @@ import zh.framework.util.ReflectUtils;
  * @createdDate 2016年10月28日
  * @description 全局Ajax异常处理类
  */
-@ControllerAdvice(annotations = { RestController.class })
+@ControllerAdvice
+@Slf4j
 public class GlobalAjaxControllerAdviceExceptionHandler {
-	@Resource
-	HttpServletRequest request;
-	@Resource
-	HttpServletResponse response;
 
-	@ExceptionHandler(value = ConstraintViolationException.class)
-	public ModelAndView jsonErrorHandler(HttpServletRequest req, HttpServletResponse response,
-			ConstraintViolationException e) throws IOException {
-		ExecResult<Map<String, String>> r = new ExecResult<>();
-		Map<String, String> map = new LinkedHashMap<>();
-		Set<ConstraintViolation<?>> constraintViolationExceptions = ((ConstraintViolationException) e)
-				.getConstraintViolations();
+    static final int VALIDATION_EXCEPTION_CODE = -999999;
 
-		Iterator<ConstraintViolation<?>> iterator = constraintViolationExceptions.iterator();
-		String[] paramNames = null;
-		String methodName = null;
-		while (iterator.hasNext()) {
+    @Resource
+    HttpServletRequest request;
+    @Resource
+    HttpServletResponse response;
 
-			ConstraintViolation<?> constraintViolation = iterator.next();
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public ModelAndView jsonErrorHandler(HttpServletRequest req, HttpServletResponse response,
+                                         ConstraintViolationException e) throws IOException {
+        GenericResponse<List<String>> r = new GenericResponse<>();
+        List<String> allMessages = new ArrayList<>();
+        Set<ConstraintViolation<?>> constraintViolationExceptions = ((ConstraintViolationException) e)
+                .getConstraintViolations();
 
-			if (StringUtils.isBlank(r.getMessage())) {
-				r.setMessage(constraintViolation.getMessage());
-			}
-			String key = constraintViolation.getPropertyPath().toString();
-			String value = constraintViolation.getMessage();
-			if (constraintViolation.getExecutableParameters() != null) {
-				if (paramNames == null) {
-					Class<?> methodOfClass = constraintViolation.getRootBeanClass();
-					methodName = key.split("\\.")[0];
-					try {
-						paramNames = ReflectUtils.getMethodParameterNames(methodOfClass, methodName,
-								constraintViolation.getExecutableParameters());
-					} catch (NotFoundException | CannotCompileException e1) {
-						e1.printStackTrace();
-						if (LogUtils.getDefaultLogger().isErrorEnabled()) {
-							LogUtils.getDefaultLogger().error(this.getClass().getName(), e1);
-						}
-					}
-				}
-				if (paramNames != null) {
+        Iterator<ConstraintViolation<?>> iterator = constraintViolationExceptions.iterator();
 
-					String index_str = key.split("\\.")[1].replaceAll("arg", "");
-					Integer index = Integer.valueOf(index_str);
-					key = paramNames[index];
-				}
-			}
-			map.put(key, value);
-		}
-		r.setCode(Integer.MIN_VALUE);
-		r.setData(map);
-		r.setSuccess(false);
-		return toJsonResult(r);
-	}
+        while (iterator.hasNext()) {
+            ConstraintViolation<?> constraintViolation = iterator.next();
+            allMessages.add(constraintViolation.getMessage());
+        }
+        if (allMessages.size() > 0) {
+            r.setMessage(allMessages.get(0));
+        }
+        r.setCode(VALIDATION_EXCEPTION_CODE);
+        r.setData(allMessages);
+        r.setSuccess(false);
+        log.info("{},{}", e.getMessage(), ExceptionUtils.getAsString(e));
+        return toJsonResult(r);
+    }
 
-	@ExceptionHandler(value = Exception.class)
-	public ModelAndView exceptionHandler(HttpServletRequest req, HttpServletResponse response, Exception e)
-			throws IOException {
-		ExecResult<Map<String, String>> r = new ExecResult<>();
-		r.setMessage(e.getMessage());
-		r.setSuccess(false);
-		r.setCode(Integer.MIN_VALUE);
-		r.setData(null);
-		return toJsonResult(r);
-	}
+    @ExceptionHandler(value = ValidationException.class)
+    public ModelAndView jsonErrorHandlerValidationException(HttpServletRequest req, HttpServletResponse response,
+                                                            ValidationException e) throws IOException {
+        GenericResponse<String> r = new GenericResponse<>();
+        r.setCode(VALIDATION_EXCEPTION_CODE);
+        r.setMessage(e.getMessage());
+        r.setSuccess(false);
+        log.debug("{},{}", e.getMessage(), ExceptionUtils.getAsString(e));
+        return toJsonResult(r);
+    }
 
-	private ModelAndView toJsonResult(ExecResult<?> execResult) throws IOException {
-		response.setContentType("application/json");
-		response.setCharacterEncoding("utf-8");
-		response.getWriter().write(JsonUtils.toJson(execResult));
-		return null;
-	}
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ModelAndView httpMessageNotReadableException(HttpServletRequest req, HttpServletResponse response,
+                                                        HttpMessageNotReadableException e) throws IOException {
+        if (e.getCause() != null && e.getCause().getCause() != null && e.getCause().getCause() instanceof zh.framework.exceptions.ValidationException) {
+            return jsonErrorHandlerValidationException(req, response, (zh.framework.exceptions.ValidationException) e.getCause().getCause());
+        } else {
+            return exceptionHandler(req, response, e);
+        }
+    }
+
+    @ExceptionHandler(value = zh.framework.exceptions.ValidationException.class)
+    public ModelAndView jsonErrorHandlerValidationException(HttpServletRequest req, HttpServletResponse response,
+                                                            zh.framework.exceptions.ValidationException e) throws IOException {
+        GenericResponse<Object> r = new GenericResponse<>();
+        r.setCode(e.getCode() == 0 ? VALIDATION_EXCEPTION_CODE : e.getCode());
+        r.setMessage(e.getMessage());
+        r.setSuccess(false);
+        r.setData(e.getData());
+        log.debug("{},{}", e.getMessage(), ExceptionUtils.getAsString(e));
+        return toJsonResult(r);
+    }
+
+    @ExceptionHandler(value = org.springframework.validation.BindException.class)
+    public ModelAndView bindExceptionHandler(HttpServletRequest req, HttpServletResponse response, org.springframework.validation.BindException e) throws IOException {
+        GenericResponse<Map<String, String>> r = new GenericResponse<>();
+        Map<String, String> allErrors = new HashMap<>();
+        e.getFieldErrors().forEach(p -> {
+            allErrors.put(p.getField(), p.getDefaultMessage());
+        });
+        r.setCode(VALIDATION_EXCEPTION_CODE);
+        r.setMessage(e.getFieldError().getDefaultMessage());
+        r.setData(allErrors);
+        r.setSuccess(false);
+        log.info("{}", ExceptionUtils.getAsString(e));
+        return toJsonResult(r);
+    }
+
+    @ExceptionHandler(value = org.springframework.web.bind.MethodArgumentNotValidException.class)
+    public ModelAndView methodArgumentNotValidExceptionHandler(HttpServletRequest req, HttpServletResponse response, org.springframework.web.bind.MethodArgumentNotValidException e) throws IOException {
+        GenericResponse<Map<String, String>> r = new GenericResponse<>();
+        Map<String, String> allErrors = new HashMap<>();
+        e.getBindingResult().getFieldErrors().forEach(p -> {
+            allErrors.put(p.getField(), p.getDefaultMessage());
+        });
+        r.setCode(VALIDATION_EXCEPTION_CODE);
+        r.setMessage(e.getBindingResult().getFieldError().getDefaultMessage());
+        r.setData(allErrors);
+        r.setSuccess(false);
+        log.info("{}", ExceptionUtils.getAsString(e));
+        return toJsonResult(r);
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView exceptionHandler(HttpServletRequest req, HttpServletResponse response, Exception e)
+            throws IOException {
+        GenericResponse<Map<String, String>> r = new GenericResponse<>();
+        r.setMessage("业务异常,请稍候重试");
+        r.setSuccess(false);
+        r.setCode(Integer.MIN_VALUE);
+        r.setData(null);
+        log.error("{}", ExceptionUtils.getAsString(e));
+        return toJsonResult(r);
+    }
+
+    private ModelAndView toJsonResult(GenericResponse<?> execResult) throws IOException {
+        response.reset();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(JsonUtils.toJson(execResult));
+        return null;
+    }
 
 }

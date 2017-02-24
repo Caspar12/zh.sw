@@ -13,10 +13,10 @@ import lombok.EqualsAndHashCode;
 @Data
 public class ValidationException extends javax.validation.ValidationException {
 
-	private Integer code;
-	/**
-	 * 
-	 */
+	private Object data;
+
+	private int code;
+
 	private static final long serialVersionUID = -3134099610951450142L;
 
 	public ValidationException(String message) {
@@ -35,9 +35,15 @@ public class ValidationException extends javax.validation.ValidationException {
 		super(cause);
 	}
 
-	public ValidationException(String message, Integer code) {
+	public ValidationException(String message, int code) {
 		super(message);
 		this.code = code;
+	}
+
+	public ValidationException(String message, int code, Object data) {
+		super(message);
+		this.code = code;
+		this.data = data;
 	}
 
 }
