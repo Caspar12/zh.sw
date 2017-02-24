@@ -1,5 +1,6 @@
 package zh.ms.persistence.contract;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,5 +29,6 @@ public class Starter {
 
     public static void main(String[] args) {
         SpringApplication.run(Starter.class, args);
+
     }
 }

@@ -11,6 +11,7 @@ import zh.ms.persistence.contract.category.api.CategoryRepository;
 import zh.ms.persistence.contract.category.model.Category;
 
 import javax.annotation.Resource;
+import java.text.MessageFormat;
 import java.util.UUID;
 
 /**
@@ -30,6 +31,18 @@ public class AccountRepositoryTest {
 
     @Test
     public void insertAdminAccount() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 0;
+        while (i < 100) {
+            stringBuilder.append(MessageFormat.format("CREATE SCHEMA `sibu_wms_base{0}` DEFAULT CHARACTER SET utf8 ;", i));
+            i++;
+        }
+        System.out.println(stringBuilder.toString());
+        if (true) {
+            return;
+        }
+
         Account account = new Account();
         account.setAccount("admin");
         account.setCategoryId(UUID.randomUUID());

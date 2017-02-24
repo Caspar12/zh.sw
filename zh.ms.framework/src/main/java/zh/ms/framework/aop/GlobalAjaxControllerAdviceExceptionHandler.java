@@ -99,6 +99,7 @@ public class GlobalAjaxControllerAdviceExceptionHandler {
 
 	private ModelAndView toJsonResult(ExecResult<?> execResult) throws IOException {
 		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(JsonUtils.toJson(execResult));
 		return null;
 	}

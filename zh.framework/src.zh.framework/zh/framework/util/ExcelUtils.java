@@ -1,15 +1,13 @@
 package zh.framework.util;
-
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import zh.framework.model.excel.Book;
+import zh.framework.model.excel.Sheet;
+import lombok.Builder;
+import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -32,27 +30,57 @@ public class ExcelUtils {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet();
         FileUtils.createNewFileIsNotExists(filePath);
+        saveSheet(sheet, pData);
+        FileOutputStream fOut = new FileOutputStream(filePath);
+        workbook.write(fOut);
+        fOut.flush();
+        fOut.close();
+    }
+
+    /**
+     * 把数据内容写入sheet,第一行为头部行也为key
+     *
+     * @param sheet HSSFSheet
+     * @param pData 数据内容,第一行为头部行也为key
+     * @return
+     */
+    public static HSSFSheet saveSheet(HSSFSheet sheet, List<Map<String, String>> pData) {
         HSSFRow headRow = sheet.createRow(0);
         if (pData.size() != 0) {
             for (String keyString : pData.get(0).keySet()) {
-
                 HSSFCell cell = headRow.createCell(headRow.getLastCellNum() == -1 ? 0 : headRow.getLastCellNum());
                 cell.setCellValue(keyString);
-
             }
 
             for (Map<String, String> entry : pData) {
-                HSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1);
+                HSSFRow row = sheet.createRow(sheet.getPhysicalNumberOfRows());
                 for (String valueString : entry.values()) {
                     HSSFCell cell = row.createCell(row.getLastCellNum() == -1 ? 0 : row.getLastCellNum());
                     cell.setCellValue(valueString);
                 }
             }
         }
-        FileOutputStream fOut = new FileOutputStream(filePath);
-        workbook.write(fOut);
-        fOut.flush();
-        fOut.close();
+        return sheet;
+    }
+
+    /**
+     * 把数据写入输出流,文件流或网络流等
+     *
+     * @param outputStream 输出流
+     * @param book         excel对应数据
+     * @throws IOException 输出流,无法写入
+     */
+    public static void save(OutputStream outputStream, Book book) throws IOException {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        if (book.getSheets() == null) {
+            book.setSheets(new ArrayList<>());
+        }
+
+        for (Sheet sheet : book.getSheets()) {
+            HSSFSheet hssfSheet = workbook.createSheet(sheet.getName());
+            saveSheet(hssfSheet, sheet.getData());
+        }
+        workbook.write(outputStream);
     }
 
     /**
@@ -158,15 +186,18 @@ public class ExcelUtils {
         if (dataFirstColIndex < 0) {
             dataFirstColIndex = 0;
         }
-        HSSFRow headRow = sheet.getRow(dataFirstRowIndex);
+        HSSFRow headRow = sheet.getRow(0);
         Map<Integer, String> keyToIndex = new HashMap<>();
-        List<Map<String, String>> result = new ArrayList<Map<String, String>>(sheet.getLastRowNum());
-        for (int i = dataFirstRowIndex; i < sheet.getLastRowNum(); i++) {
-            HashMap<String, String> col = new HashMap<String, String>();
+        List<Map<String, String>> result = new ArrayList<Map<String, String>>(sheet.getPhysicalNumberOfRows());
+        for (int i = dataFirstRowIndex; i < sheet.getPhysicalNumberOfRows(); i++) {
+            Map<String, String> col = new LinkedHashMap<String, String>();
 
             for (int j = dataFirstColIndex; j < headRow.getLastCellNum(); j++) {
                 HSSFCell cell = headRow.getCell(j);
-                keyToIndex.put(cell.getColumnIndex(), cell.getStringCellValue());
+                String cellValue = cell.toString();
+                if (cellValue != null) {
+                    keyToIndex.put(cell.getColumnIndex(), cellValue);
+                }
             }
 
             HSSFRow row = sheet.getRow(i);
@@ -174,7 +205,10 @@ public class ExcelUtils {
 
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-                col.put(keyToIndex.get(cell.getColumnIndex()), cell.getStringCellValue());
+                String key = keyToIndex.get(cell.getColumnIndex());
+                if (key != null) {
+                    col.put(key, cell.toString());
+                }
             }
             result.add(col);
         }

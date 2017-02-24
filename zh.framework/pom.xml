@@ -99,6 +99,11 @@
             <version>${org.projectlombok-lombok-version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time-version}</version>
+        </dependency>
     </dependencies>
 
     <build>
