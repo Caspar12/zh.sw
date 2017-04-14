@@ -2,6 +2,7 @@ package zh.framework.util;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,5 +35,18 @@ public class ValidUtils {
 
     public static boolean isEmpty(Collection<String> collection) {
         return collection == null && collection.isEmpty();
+    }
+
+    public static boolean isUUID(String value) {
+        try {
+            UUID.fromString(value);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public static boolean isNotUUID(String value) {
+        return !isUUID(value);
     }
 }

@@ -1,13 +1,13 @@
 package zh.framework.util;
-import zh.framework.model.excel.Book;
-import zh.framework.model.excel.Sheet;
-import lombok.Builder;
-import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
+
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.util.NumberToTextConverter;
+import zh.framework.model.excel.Book;
+import zh.framework.model.excel.Sheet;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -204,10 +204,39 @@ public class ExcelUtils {
             Iterator<Cell> cellIterator = row.cellIterator();
 
             while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
+                HSSFCell cell = (HSSFCell) cellIterator.next();
                 String key = keyToIndex.get(cell.getColumnIndex());
                 if (key != null) {
-                    col.put(key, cell.toString());
+                    String value = null;
+                    switch (cell.getCellTypeEnum()) {
+                        case BLANK:
+                            value = "";
+                            break;
+                        case BOOLEAN:
+                            value = cell.getBooleanCellValue() ? "TRUE" : "FALSE";
+                            break;
+                        case ERROR:
+                            value = "";
+                            break;
+                        case FORMULA:
+                            value = cell.getCellFormula();
+                            break;
+                        case NUMERIC:
+                            //TODO apply the dataformat for this cell
+                            if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                value = sdf.format(cell.getDateCellValue());
+                            } else {
+                                value = NumberToTextConverter.toText(cell.getNumericCellValue());
+                            }
+                            break;
+                        case STRING:
+                            value = cell.getStringCellValue();
+                            break;
+                        default:
+                            value = "Unknown Cell Type: " + cell.getCellTypeEnum();
+                    }
+                    col.put(key, value);
                 }
             }
             result.add(col);
