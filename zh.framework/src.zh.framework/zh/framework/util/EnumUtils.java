@@ -1,6 +1,13 @@
 package zh.framework.util;
 
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: qiujingwang
@@ -109,5 +116,36 @@ public abstract class EnumUtils {
 
         }
         return value;
+    }
+
+    /**
+     * 反射类举类,转为List map
+     *
+     * @param className
+     * @param properties
+     * @return
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     */
+    public static List<Map<String, Object>> reflectToMap(String className, String[] properties) throws ClassNotFoundException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        Class<Enum> clazz = (Class<Enum>) Class.forName(className);//通过反射获取枚举对象
+        Enum[] enumConstants = clazz.getEnumConstants();
+        for (Enum t : enumConstants) {
+            Map<String, Object> resultModel = new HashedMap();
+            if (properties != null && properties.length > 0) {
+                for (String property : properties) {
+                    if (StringUtils.isBlank(property)) continue;
+                    Object value = PropertyUtils.getProperty(t, property);
+                    resultModel.put(property, value);
+                }
+            }
+            resultList.add(resultModel);
+        }
+        return resultList;
+
     }
 }
