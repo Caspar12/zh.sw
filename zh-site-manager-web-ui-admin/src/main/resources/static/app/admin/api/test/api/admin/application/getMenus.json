@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "code": 0,
+  "message": "",
+  "data": [
+    {
+      "id": 1,
+      "name": "用户管理",
+      "parentId": null
+    },
+    {
+      "id": 10001,
+      "name": "用户列表",
+      "url": "/account/list",
+      "parentId": 1
+    },
+    {
+      "id": 2,
+      "name": "角色管理",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "name": "权限管理",
+      "parentId": null
+    },
+    {
+      "id": 4,
+      "name": "系统管理",
+      "parentId": null
+    }
+  ]
+}

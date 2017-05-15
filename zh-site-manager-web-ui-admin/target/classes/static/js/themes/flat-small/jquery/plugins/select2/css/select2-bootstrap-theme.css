@@ -1,0 +1,13 @@
+.select2-container .select2-selection--single {
+    height: 28px;
+    line-height: 1.42857;
+    padding: 0px 24px 0px 12px;
+}
+
+.select2-container .select2-selection--single .select2-selection__arrow {
+    position: absolute;
+    bottom: 0;
+    right: 12px;
+    top: 2px;
+    width: 4px;
+}

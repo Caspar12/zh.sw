@@ -345,3 +345,8 @@ hs_err_pid*
 /zh.web.site.admin/zh.web.site.admin.iml
 /zh.plugin.mybatis/src/main/main1.iml
 /zh.ms.persistence.contract/target
+/out
+/zh.ms.parent/target
+/zh.ms.parent/zh.ms.parent.iml
+/zh.ms.persistence.parent/*.iml
+/zh.ms.parent/*.iml

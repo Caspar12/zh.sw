@@ -1,0 +1,43 @@
+@import url("../flat/flat.css");
+@import url("dijit/form/TextBox.css");
+@import url("jquery/plugins/select2/css/select2-bootstrap-theme.css");
+
+.flat .dijitTextBox .dijitInputField input {
+    height: 28px;
+}
+
+.flat .dijitTitlePaneTitle {
+    border-color: #2196f3;
+    background: #2196f3;
+    color: white;
+}
+.flat .dijitTitlePaneTitleHover{
+    border-color: #38a3fb;
+    background: #38a3fb;
+}
+.flat .dijitTitlePaneTitleActive{
+    border-color: #38a3fb;
+    background: #38a3fb;
+}
+.flat .dijitComboBox .dijitArrowButton {
+    padding: 0px 0px 0px 0px;
+}
+.flat .dijitComboBox .dijitButtonNode {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9e9e9e;
+    padding: 4px;
+    border-radius: 3px;
+    line-height: 26px;
+    cursor: pointer;
+    -webkit-transition: all 0.05s linear;
+    -moz-transition: all 0.05s linear;
+    -o-transition: all 0.05s linear;
+    -ms-transition: all 0.05s linear;
+    transition: all 0.05s linear;
+    background: #fff;
+    border-radius: 0 2.000000000000001px 2.000000000000001px 0;
+}
+.flat .dijitComboBox .dijitArrowButton {
+    padding: 0px;
+}

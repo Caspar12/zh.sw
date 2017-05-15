@@ -1,0 +1,6 @@
+.tableContainer-table-horiz .tableContainer-labelCell{
+    text-align: right;
+}
+.tableContainer-table-horiz .tableContainer-labelCell label{
+     margin-right: 10px;
+}

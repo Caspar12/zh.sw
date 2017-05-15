@@ -11,6 +11,7 @@
         <module>zh.ms.framework</module>
         <module>zh.ms.parent</module>
         <module>zh.spring.context</module>
+        <module>zh-site-manager-web-ui-admin</module>
         <!--<module>zh.plugin.mybatis</module>-->
         <!--<module>zh.web.site.admin</module>-->
 

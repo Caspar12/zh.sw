@@ -1,0 +1,38 @@
+<div>
+    <img class="zlogin-bg" src="themes/images/login_bg.jpg" alt="">
+    <div class="zlogin-main">
+        <img class="zlogin-logo" src="themes/images/login_logo.png" alt="">
+        <div class="login-formbox">
+            <form name="frm" id="frm" data-dojo-id="frm" data-dojo-attach-point="frmLoginPoint" data-dojo-type="dojox/form/Manager">
+                <div class="login-form-item actived hide" data-dojo-attach-point="divInviterIdPoint"  >
+                    <input type="hidden" data-dojo-attach-point="txtInviterIdPoint" name="inviterId" placeholder="邀请人Id" readonly="readonly" class="zlogin-input">
+                    <input type="text" data-dojo-attach-point="txtInviterTextPoint" name="inviterText" placeholder="邀请人名称" readonly="readonly" class="zlogin-input">
+                </div>
+                <div class="login-form-item actived">
+                    <input type="text"  data-dojo-attach-point="txtAccountPoint" name="account" placeholder="请输入注册账号" class="zlogin-input">
+                </div>
+                <div class="login-form-item actived">
+                    <input   type="text" data-dojo-attach-point="txtNamePoint" name="name" placeholder="请输入名称" class="zlogin-input">
+                </div>
+                <div class="login-form-item actived">
+                    <input type="password" data-dojo-attach-point="txtPasswordPoint" name="password" placeholder="请输入密码" class="zlogin-input">
+                </div>
+                <div class="login-form-item actived">
+                    <input   type="password" data-dojo-attach-point="txtConfirmPasswordPoint" name="confirmPassword" placeholder="请输入确认密码" class="zlogin-input">
+                </div>
+                <div class="login-form-item">
+                    <table>
+                        <tr>
+                            <td style="width: 380px;">
+                                <button class="zlogin-btn-submmit" type="submit" style="width:100%">注册
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="checkbox" class="zlogin-switch-checkbox" id="type" name="type" style="display: none;">
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class="zfooter-copyright zfooter-login">Copyright © SiBuWMS 2016 - 2017</p>
+</div>

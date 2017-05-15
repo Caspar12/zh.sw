@@ -1,0 +1,158 @@
+/**
+ * Created by 陈志杭 on 2016/12/27.
+ * descriptipn
+ * @file admin/view-partial/main/order/widget/enums/OrderListTableColumnEnum
+ */
+define([
+    'admin/services/enums/OrderPropertyEnum',
+    'admin/services/enums/OrderStatusEnum',
+], function (OrderPropertyEnum, OrderStatusEnum) {
+    var OrderListTableColumnEnum = {
+        All: {
+            id: 0,
+            columns: [
+                OrderPropertyEnum.SerialNumber,
+                OrderPropertyEnum.DeliveryPlanSerialNumber,
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.TpOrderCreatedDt,
+                OrderPropertyEnum.DeliverName,
+                OrderPropertyEnum.TrackingNumber,
+                OrderPropertyEnum.ReceviceProvinceName,
+                OrderPropertyEnum.TpArea,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.ImportDt,
+            ]
+        },
+        WaitPlan: {
+            id: 1,
+            text: '待计划订单',
+            columns: [
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.TpArea,
+            ]
+        },
+        PlaningForDeliver: {
+            id: 2,
+            text: '发货计划-选择快递',
+            columns: [
+                OrderPropertyEnum.SerialNumber,
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.TpOrderCreatedDt,
+                OrderPropertyEnum.ReceviceProvinceName,
+                OrderPropertyEnum.TpArea,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.ImportDt,
+            ],
+        },
+        PlaningForDeliverBuildBatch: {
+            id: 200,
+            text: '发货计划-生成批次',
+            columns: [
+                OrderPropertyEnum.SerialNumber,
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.TpOrderCreatedDt,
+                OrderPropertyEnum.DeliverName,
+                OrderPropertyEnum.ReceviceProvinceName,
+                OrderPropertyEnum.TpArea,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.ImportDt,
+            ],
+        },
+        PlaningForPackageType: {
+            id: 3,
+            text: '大小包选择',
+            columns: [
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.DeliverName,
+                OrderPropertyEnum.DeliverPrintWaybillTemplateName,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.TpArea,
+            ],
+        },
+        PlaningForCheck: {
+            id: 4,
+            text: '复核',
+            columns: [
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.DeliverName,
+                OrderPropertyEnum.DeliverPrintWaybillTemplateName,
+                OrderPropertyEnum.PackageTypeText,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.TpArea,
+            ],
+        },
+        WaitPrint:{
+            id: 4,
+            text: '打印快递',
+            columns: [
+                OrderPropertyEnum.SerialNumber,
+                OrderPropertyEnum.DeliveryPlanSerialNumber,
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.TpOrderCreatedDt,
+                OrderPropertyEnum.DeliverName,
+                OrderPropertyEnum.ReceviceProvinceName,
+                OrderPropertyEnum.TpArea,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.ImportDt,
+            ],
+        },
+        WaitPrintInputWaybill:{
+            id: 5,
+            text: '打印快递-输入快递单号',
+            columns: [
+                OrderPropertyEnum.SerialNumber,
+                OrderPropertyEnum.DeliveryPlanSerialNumber,
+                OrderPropertyEnum.TpOrderId,
+                OrderPropertyEnum.TpOrderCreatedDt,
+                OrderPropertyEnum.DeliverName,
+                OrderPropertyEnum.TrackingNumber,
+                OrderPropertyEnum.ReceviceProvinceName,
+                OrderPropertyEnum.TpArea,
+                OrderPropertyEnum.Recevier,
+                OrderPropertyEnum.RecevierContact,
+                OrderPropertyEnum.RecevierAddress,
+                OrderPropertyEnum.OrderItemName,
+                OrderPropertyEnum.TpOrderRemark,
+                OrderPropertyEnum.TpName,
+                OrderPropertyEnum.ImportDt,
+            ],
+        }
+    };
+    return OrderListTableColumnEnum;
+});

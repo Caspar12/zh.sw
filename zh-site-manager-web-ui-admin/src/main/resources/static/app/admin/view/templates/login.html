@@ -1,0 +1,30 @@
+<div>
+    <img class="zlogin-bg" src="themes/images/login_bg.jpg" alt="">
+    <div class="zlogin-main">
+        <img class="zlogin-logo" src="themes/images/login_logo.png" alt="">
+        <div class="login-formbox">
+            <form name="loginForm" data-dojo-attach-point="frmLoginPoint">
+                <div class="login-form-item actived">
+                    <span class="tip zlogin-error" data-dojo-attach-point="errorMsgPoint" ></span>
+                    <span id="msgCodeError" class="tip zlogin-error"></span>
+                    <input type="text" data-dojo-attach-point="txtAccountPoint" name="account" placeholder="请输入用户名" class="zlogin-input">
+                </div>
+                <div class="login-form-item actived">
+                    <input type="password" data-dojo-attach-point="txtPasswordPoint" name="password" placeholder="请输入密码" class="zlogin-input">
+                </div>
+                <div class="login-form-item">
+                    <table>
+                        <tr>
+                            <td style="width: 380px;">
+                                <button class="zlogin-btn-submmit" type="submit" style="width:100%">登录
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="checkbox" class="zlogin-switch-checkbox" id="type" name="type" style="display: none;">
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class="zfooter-copyright zfooter-login">Copyright © SiBuWMS 2016 - 2017</p>
+</div>

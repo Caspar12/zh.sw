@@ -1,0 +1,14 @@
+/**
+ * @author caspar - chengzhihang
+ * @contact 279397942@qq.com
+ * @date 2016/12/29
+ * @file admin/view-partial/main/order/widget/form/value-widget/edit/TpNameText
+ */
+define([
+    'admin/view-partial/main/order/widget/form/value-widget/TpNameText',
+    "dojo/_base/declare"
+], function (TpNameText, declare) {
+    return declare('admin/view-partial/main/order/widget/form/value-widget/edit/TpNameText', [TpNameText], {
+
+    });
+});

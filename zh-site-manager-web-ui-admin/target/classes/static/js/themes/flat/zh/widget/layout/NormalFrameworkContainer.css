@@ -1,0 +1,49 @@
+.NormalFrameworkContainer {
+}
+
+.flat .NormalFrameworkContainerTop {
+    background-color: rgb(41, 81, 106);
+    height: 46px;
+    overflow: hidden;
+}
+
+.flat .NormalFrameworkContainerTop .TopTitle {
+    height: 46px;
+    line-height: 46px;
+    font-family: "Microsoft YaHei";
+    font-size: 22px;
+    font-weight: bold;
+    display: block;
+    color: white;
+}
+
+.flat .NormalFrameworkContainerTop .TopTitle .left {
+    float: left;
+    padding-left: 20px;
+    width: 80%;
+    overflow: hidden;
+}
+
+.flat .NormalFrameworkContainerTop .TopTitle .right {
+    float: right;
+    width: 20%;
+    padding-right: 20px;
+    overflow: hidden;
+    font-size: 14px;
+    text-align: right;
+}
+
+.flat .NormalFrameworkContainerTop .TopTitle .right .button {
+    overflow: hidden;
+    margin: 0 0 0 0;
+}
+
+.flat .NormalFrameworkContainerTop .TopTitle .right .button .dijitButtonNode {
+    background-color: #2196f3;
+    border: none;
+
+}
+
+.flat .NormalFrameworkContainerLeft .dijitAccordionChildWrapper {
+    border: 1px solid #d0d0d0;
+}

@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+.zlogin-bg{ position:fixed; top:0px; width:1920px; height:100%; left:50%; margin-left:-960px; z-index:0;}
+.zlogin-main{margin:0 auto; padding-top:160px; position:relative; z-index:1; padding-bottom:90px;}
+.zlogin-logo{ display:block; margin:0 auto;width:70%;}
+.login-formbox{ margin:0 auto; margin-top:55px;}
+.login-form-item{ width:390px; margin:0 auto; position:relative; margin-bottom:30px;}
+.zlogin-input{ display:inline-block; width:380px; border:1px solid #c30; -webkit-border-radius:5px; border-radius:5px; padding:10px 30px;  box-sizing: border-box; color:#999; }
+.zlogin-error{ color: #ff0000; position:absolute; left:0; bottom:-30px; padding:10px 0; }
+.login-form-item .zlogin-input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #999;
+}
+.login-form-item .zlogin-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+.login-form-item .zlogin-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+}
+.login-form-item .zlogin-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #999;
+}
+.login-form-item.actived .zlogin-input{ background-color:#fdba74; color:#bc5601;}
+.login-form-item.actived .zlogin-input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #bc5601;
+}
+.login-form-item.actived .zlogin-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #bc5601;
+}
+.login-form-item.actived .zlogin-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #bc5601;
+}
+.login-form-item.actived .zlogin-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #bc5601;
+}
+.zlogin-switch-icon{ display:inline-block; padding-left:64px; color:#fff; background:url(../images/zradio_switch.png) 0px 0px no-repeat; height:26px; line-height:26px; cursor:pointer;}
+.zlogin-switch-checkbox{ display:none;}
+.zlogin-switch-checkbox:checked + .zlogin-switch-icon{ background-position:0 -26px;}
+.zlogin-btn-submmit{ display:inline-block;  width:248px; background-color: #d24c29; border:1px solid #c30; -webkit-border-radius:5px; border-radius:5px; color:#fff; font-size:18px; height:45px; box-shadow:0 1px 0 #6c3302; cursor:pointer;}
+.zlogin-btn-send-msg{ display:inline-block; margin-left:22px; width:100px; background-color: #d24c29; border:1px solid #c30; -webkit-border-radius:5px; border-radius:5px; color:#fff; font-size:18px; height:32px; box-shadow:0 1px 0 #6c3302; cursor:pointer;}
+.zlogin-tips-img{ display:block; margin:55px auto 0;}
+.zfooter-copyright{ color:#f18686; text-align:center; background:#b52e01; padding:15px 0;}
+.zfooter-login{ position:fixed; width:100%; bottom:0; left:0; z-index:9;}
+.zlogin-item-r{ color:#ffbc6f; position:absolute; left:100%; top:0; min-width:180px; padding:10px 0;}
+.zlogin-forget-psd{ color:#ffbc6f; }
+.zlogin-forget-psd:hover{ text-decoration:underline;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

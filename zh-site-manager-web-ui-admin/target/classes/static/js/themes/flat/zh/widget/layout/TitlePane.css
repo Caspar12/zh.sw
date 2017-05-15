@@ -1,0 +1,6 @@
+.flat .dijitTitlePaneContentInner.contentAutoScroll,.flat .dijitContentPane.contentAutoScroll{
+    overflow-y: auto;
+}
+.flat .dijitTitlePaneTitle.noToggleable{
+    cursor: default;
+}

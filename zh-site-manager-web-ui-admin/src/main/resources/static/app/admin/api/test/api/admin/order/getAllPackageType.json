@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "name": "小包"
+    },
+    {
+      "id": 1,
+      "name": "大包"
+    }
+  ],
+  "code": 0,
+  "message": "",
+  "success": true
+}
