@@ -1,17 +1,14 @@
 package zh.framework.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
 
-	public static boolean IsExists(String pFileFullPath) {
+
+	public static boolean isExists(String pFileFullPath) {
 		File file = new File(pFileFullPath);
 		return file.exists();
 	}
@@ -101,7 +98,81 @@ public class FileUtils {
 		}
 		return result;
 	}
+	/**
+	 * 移除字符串中的BOM前缀
+	 *
+	 * @param _sLine 需要处理的字符串
+	 * @return 移除BOM后的字符串.
+	 */
+	private static String removeBomHeaderIfExists(String _sLine) {
+		if (_sLine == null) {
+			return null;
+		}
+		String line = _sLine;
+		if (line.length() > 0) {
+			char ch = line.charAt(0);
+			// 使用while是因为用一些工具看到过某些文件前几个字节都是0xfffe.
+			// 0xfeff,0xfffe是字节序的不同处理.JVM中,一般是0xfeff
+			while ((ch == 0xfeff || ch == 0xfffe)) {
+				line = line.substring(1);
+				if (line.length() == 0) {
+					break;
+				}
+				ch = line.charAt(0);
+			}
+		}
+		return line;
+	}
+	/**
+	 * 基本文件操作
+	 */
+	public static String FILE_READING_ENCODING = "UTF-8";
+	public static String FILE_WRITING_ENCODING = "UTF-8";
 
+	public static String readFile(String _sFileName, String _sEncoding) throws Exception {
+		StringBuffer buffContent = null;
+		String sLine;
+
+		FileInputStream fis = null;
+		BufferedReader buffReader = null;
+		if (_sEncoding == null || "".equals(_sEncoding)) {
+			_sEncoding = FILE_READING_ENCODING;
+		}
+
+		try {
+			fis = new FileInputStream(_sFileName);
+			buffReader = new BufferedReader(new InputStreamReader(fis,
+					_sEncoding));
+			boolean zFirstLine = "UTF-8".equalsIgnoreCase(_sEncoding);
+			while ((sLine = buffReader.readLine()) != null) {
+				if (buffContent == null) {
+					buffContent = new StringBuffer();
+				} else {
+					buffContent.append("\n");
+				}
+				if (zFirstLine) {
+					sLine = removeBomHeaderIfExists(sLine);
+					zFirstLine = false;
+				}
+				buffContent.append(sLine);
+			}// end while
+			return (buffContent == null ? "" : buffContent.toString());
+		} catch (FileNotFoundException ex) {
+			throw new Exception("要读取的文件没有找到!", ex);
+		} catch (IOException ex) {
+			throw new Exception("读取文件时错误!", ex);
+		} finally {
+			// 增加异常时资源的释放
+			try {
+				if (buffReader != null)
+					buffReader.close();
+				if (fis != null)
+					fis.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 	public static String readLine(String pFilePath) {
 		String fileName = pFilePath;
 		File file = new File(fileName);

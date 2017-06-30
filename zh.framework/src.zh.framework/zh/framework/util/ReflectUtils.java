@@ -347,6 +347,36 @@ public class ReflectUtils {
     }
 
     /**
+     * beanUtils.copyProperties复制相同名称属性
+     *
+     * @param dest
+     * @param src
+     */
+    public static void copyBeanProperties(Object dest, Object src) {
+        try {
+            BeanUtils.copyProperties(dest, src);
+        } catch (Exception e) {
+            throw new ValidationException("对象转换失败", e);
+        }
+    }
+
+    /**
+     * beanUtils.copyProperties复制相同名称属性
+     *
+     * @param src
+     * @param clz
+     * @return
+     */
+    public static Object copyBeanProperties(Object src, Class clz) {
+        try {
+            Object dest = clz.newInstance();
+            BeanUtils.copyProperties(dest, src);
+            return dest;
+        } catch (Exception e) {
+            throw new ValidationException("对象转换失败", e);
+        }
+    }
+    /**
      * 复制相同名称属性
      *
      * @param pDest 目標对象实例
