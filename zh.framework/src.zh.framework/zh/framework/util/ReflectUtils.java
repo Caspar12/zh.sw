@@ -284,20 +284,18 @@ public class ReflectUtils {
      */
     public static Class<?> getPropertyGenericType(Class<?> pBeanClass, String pPropertyName, int index) {
 
-        PropertyDescriptor propertyDescriptor = getPropertyDescriptor(pBeanClass, pPropertyName);
-
-        return getGenericType(propertyDescriptor.getPropertyType(), index);
+        return getFieldGenericType(pBeanClass,pPropertyName,index);
 
     }
 
     /**
-     * 获取类类型第index个泛型类型
+     * 获取泛型类类型的第index个泛型类型
      *
      * @param pClass 类类型
      * @param index  第几个泛型
      * @return 泛型类型
      */
-    public static Class<?> getGenericType(Class<?> pClass, int index) {
+    public static Class<?> getGenericSuperclassType(Class<?> pClass, int index) {
         Type genType = pClass.getGenericSuperclass();
         if (!(genType instanceof ParameterizedType)) {
             return Object.class;
@@ -311,7 +309,40 @@ public class ReflectUtils {
         }
         return (Class<?>) params[index];
     }
+    /**
+     * 获取泛型类类型的第index个泛型类型
+     *
+     * @param pClass 类类型
+     * @param name   field name
+     * @param index  第几个泛型
+     * @return 泛型类型
+     */
+    public static Class<?> getFieldGenericType(Class<?> pClass, String name, int index) {
+        Field[] fs = pClass.getDeclaredFields(); // 得到所有的fields
 
+        for (Field f : fs) {
+            if (!f.getName().equals(name)) continue;
+            Class fieldClazz = f.getType(); // 得到field的class及类型全路径
+            if (fieldClazz.isPrimitive()) continue;  //【1】 //判断是否为基本类型
+            if (fieldClazz.getName().startsWith("java.lang")) continue; //getName()返回field的类型全路径；
+            if (fieldClazz.isAssignableFrom(Iterable.class)) //【2】
+            {
+                Type fc = f.getGenericType(); // 关键的地方，如果是List类型，得到其Generic的类型
+
+                if (fc == null) continue;
+
+                if (fc instanceof ParameterizedType) // 【3】如果是泛型参数的类型
+                {
+                    ParameterizedType pt = (ParameterizedType) fc;
+
+                    Class genericClazz = (Class) pt.getActualTypeArguments()[0]; //【4】 得到泛型里的class类型对象。
+
+                    return genericClazz;
+                }
+            }
+        }
+        return null;
+    }
     /**
      * 获取类类型里面有某一类型注解的所有字段
      *
@@ -345,7 +376,45 @@ public class ReflectUtils {
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         return PropertyUtils.getIndexedProperty(pBean, pPropertyName, pIndex);
     }
+    /**
+     * 获取对象所有属性
+     *
+     * @param bean
+     * @return
+     * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     */
+    public static Map<String, Object> getProperties(Object bean) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 
+        return getProperties(bean, null);
+    }
+
+    /**
+     * 获取对象属性
+     *
+     * @param bean
+     * @param includeProperties 获取属性的名称,null获取全部
+     * @return
+     * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     */
+    public static Map<String, Object> getProperties(Object bean, List<String> includeProperties) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+
+        Map<String, Object> map = new TreeMap<>();
+        if (bean == null) return map;
+        List<PropertyDescriptor> propertyDescriptors = ReflectUtils.getPropertyDescriptors(bean.getClass());
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+            String name = propertyDescriptor.getName();
+            if (includeProperties != null && !includeProperties.contains(name)) {
+                continue;
+            }
+            Object value = PropertyUtils.getProperty(bean, name);
+            map.put(name, value);
+        }
+        return map;
+    }
     /**
      * beanUtils.copyProperties复制相同名称属性
      *
